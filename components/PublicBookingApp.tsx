@@ -183,7 +183,7 @@ export default function PublicBookingApp() {
     [aquasportClasses, form.aquasportClassId]
   );
 
-  const isAquasportBooking = selectedService?.category?.slug === "aqua-sports";
+  const isAquasportBooking = selectedService?.category?.slug === "bouger-en-douceur";
 
   const featuredServices = useMemo(
     () => services.filter((service) => service.is_featured).slice(0, 4),
@@ -560,10 +560,9 @@ export default function PublicBookingApp() {
             <div className="container">
               <div>
                 <div className="hero-kicker">Un havre de paix pour votre corps et votre esprit</div>
-                <h1>Votre bien-être au cœur de nos priorités.</h1>
+                <h1>Spa beauté & bien-être premium à Saint-Claude.</h1>
                 <p>
-                  L’expert du bien-être et de la beauté en Guadeloupe, pour une expérience
-                  sensorielle fluide, chic et apaisante.
+                  Soins visage, massages, épilation, coffrets cadeaux et aqua-sports dans un espace dédié à votre bien-être.
                 </p>
                 <div className="hero-actions">
                   <button className="btn btn-primary" onClick={() => goTo("booking")}>
@@ -572,7 +571,16 @@ export default function PublicBookingApp() {
                   <button
                     className="btn btn-light"
                     onClick={() => {
-                      setActiveCategory("aqua-sports");
+                      setActiveCategory("soffrir-une-vraie-pause");
+                      goTo("catalog");
+                    }}
+                  >
+                    Découvrir les coffrets
+                  </button>
+                  <button
+                    className="btn btn-light"
+                    onClick={() => {
+                      setActiveCategory("bouger-en-douceur");
                       goTo("catalog");
                     }}
                   >
@@ -581,28 +589,27 @@ export default function PublicBookingApp() {
                 </div>
               </div>
               <div className="hero-card">
-                <span className="badge">Offres Esthetic Diamonds</span>
-                <h2>Catalogue aligné avec les prestations publiques</h2>
+                <span className="badge">Offre clarifiée</span>
+                <h2>4 univers pour choisir plus vite</h2>
                 <p>
-                  Soins visage, microshading, cils, épilation, beauté mains et pieds,
-                  massages, minceur, Aqua-sports et coffrets bien-être.
+                  La réservation est structurée selon la stratégie marketing : peau, pause, confiance et aqua-sports.
                 </p>
                 <div className="hero-mini-grid">
                   <div className="hero-mini">
-                    <strong>2 min</strong>
-                    <span>Parcours client rapide</span>
+                    <strong>Peau</strong>
+                    <span>Éclat, anti-âge, hydratation</span>
                   </div>
                   <div className="hero-mini">
-                    <strong>DB</strong>
-                    <span>Prestations depuis Supabase</span>
+                    <strong>Pause</strong>
+                    <span>Massages, rituels, coffrets</span>
                   </div>
                   <div className="hero-mini">
-                    <strong>Admin</strong>
-                    <span>Réservations sécurisées</span>
+                    <strong>Confiance</strong>
+                    <span>Épilation, laser, cils, mains</span>
                   </div>
                   <div className="hero-mini">
-                    <strong>Next</strong>
-                    <span>Prêt pour Vercel</span>
+                    <strong>Aqua</strong>
+                    <span>Bouger en douceur</span>
                   </div>
                 </div>
               </div>
@@ -611,24 +618,38 @@ export default function PublicBookingApp() {
 
           <section className="quick-services">
             <div className="container quick-grid">
-              <QuickCard icon="✦" title="Soins visage" text="Soins personnalisés, éclat, anti-âge et hydratation." />
-              <QuickCard icon="≈" title="Aqua-sports" text="Aquabike, aquagym et cours aquatiques." />
-              <QuickCard icon="◇" title="Massages" text="Relaxation profonde et revitalisation." />
-              <a href="/cartes-cadeaux" style={{ textDecoration: "none" }}>
-                <QuickCard icon="◆" title="Cartes cadeaux" text="Idées cadeaux et rituels bien-être." />
-              </a>
+              <button className="quick-card quick-button" onClick={() => { setActiveCategory("sublimer-la-peau"); goTo("catalog"); }}>
+                <div className="icon">✦</div>
+                <h3>Sublimer la peau</h3>
+                <p>Peau nette, lumineuse, ferme et fraîche.</p>
+              </button>
+              <button className="quick-card quick-button" onClick={() => { setActiveCategory("soffrir-une-vraie-pause"); goTo("catalog"); }}>
+                <div className="icon">◇</div>
+                <h3>S’offrir une vraie pause</h3>
+                <p>Massages, gommages, rituels et coffrets.</p>
+              </button>
+              <button className="quick-card quick-button" onClick={() => { setActiveCategory("se-sentir-nette-et-confiante"); goTo("catalog"); }}>
+                <div className="icon">◆</div>
+                <h3>Se sentir nette et confiante</h3>
+                <p>Épilation, laser, regard, mains et pieds.</p>
+              </button>
+              <button className="quick-card quick-button" onClick={() => { setActiveCategory("bouger-en-douceur"); goTo("catalog"); }}>
+                <div className="icon">≈</div>
+                <h3>Bouger en douceur</h3>
+                <p>Aquabike, aquagym et éveil aquatique.</p>
+              </button>
             </div>
           </section>
 
           <section className="section">
             <div className="container">
               <SectionHead
-                eyebrow="Nos soins de beauté et de bien-être"
-                title="Laissez-vous envelopper par une atmosphère chic et apaisante."
-                description="Cette version est connectable à Supabase et conserve la charte turquoise, blanche et spa du site Esthetic Diamonds."
+                eyebrow="Sélection stratégique"
+                title="Les prestations à pousser en priorité."
+                description="Ces soins servent de portes d’entrée commerciales : diagnostic peau, massage, coffret, laser et aqua-sports."
                 action={
                   <button className="btn btn-dark" onClick={() => goTo("catalog")}>
-                    Voir les prestations
+                    Voir tous les univers
                   </button>
                 }
               />
@@ -649,6 +670,21 @@ export default function PublicBookingApp() {
               )}
             </div>
           </section>
+
+          <section className="section soft-section">
+            <div className="container">
+              <SectionHead
+                eyebrow="Quel soin choisir ?"
+                title="Une orientation simple pour les clientes qui hésitent."
+                description="Cette section transforme le catalogue en aide à la décision, au lieu de laisser la cliente face à trop de prestations."
+              />
+              <div className="grid grid-3">
+                <div className="card card-pad"><h3>Peau terne</h3><p>Soin coup d’éclat — 55 €</p><button className="btn btn-light" onClick={() => { setSearch("coup d’éclat"); goTo("catalog"); }}>Voir le soin</button></div>
+                <div className="card card-pad"><h3>Rides / fermeté</h3><p>Hyaluronique, Silicium Lift ou Exception Marine.</p><button className="btn btn-light" onClick={() => { setSearch("hyaluronique"); goTo("catalog"); }}>Voir les soins anti-âge</button></div>
+                <div className="card card-pad"><h3>Besoin de souffler</h3><p>Massage californien, rituels corps ou coffrets.</p><button className="btn btn-light" onClick={() => { setActiveCategory("soffrir-une-vraie-pause"); goTo("catalog"); }}>Voir les pauses bien-être</button></div>
+              </div>
+            </div>
+          </section>
         </>
       )}
 
@@ -657,8 +693,8 @@ export default function PublicBookingApp() {
           <div className="container">
             <SectionHead
               eyebrow="Catalogue réservation"
-              title="Nos soins"
-              description="Soins du visage, épilation, beauté des mains et pieds, massages, minceur, Aqua-sports et coffrets."
+              title="Choisissez votre univers."
+              description="Les offres sont regroupées en 4 univers marketing pour rendre le choix plus simple, plus clair et plus vendeur."
               action={
                 <input
                   className="input"

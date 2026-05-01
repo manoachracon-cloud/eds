@@ -2,83 +2,35 @@ import type { EmployeeServiceRow, Service, ServiceCategory } from "@/lib/types";
 
 export const demoCategories: ServiceCategory[] = [
   {
-    "id": "demo-cat-soins-visage",
-    "name": "Soins du visage",
-    "slug": "soins-visage",
-    "description": "Soins visage, anti-âge et microneedling.",
+    "id": "demo-univers-sublimer-peau",
+    "name": "Sublimer la peau",
+    "slug": "sublimer-la-peau",
+    "description": "Pour une peau plus nette, plus lumineuse, plus ferme et plus fraîche.",
     "display_order": 1,
     "is_active": true
   },
   {
-    "id": "demo-cat-microshading-cils",
-    "name": "Microshading & cils",
-    "slug": "microshading-cils",
-    "description": "Sourcils, détatouage et extensions de cils.",
+    "id": "demo-univers-vraie-pause",
+    "name": "S’offrir une vraie pause",
+    "slug": "soffrir-une-vraie-pause",
+    "description": "Massages, gommages, sauna, rituels corps et coffrets pour relâcher la pression.",
     "display_order": 2,
     "is_active": true
   },
   {
-    "id": "demo-cat-epilation-cire",
-    "name": "Épilation cire",
-    "slug": "epilation-cire",
-    "description": "Épilations traditionnelles femme et homme.",
+    "id": "demo-univers-nette-confiante",
+    "name": "Se sentir nette et confiante",
+    "slug": "se-sentir-nette-et-confiante",
+    "description": "Épilation, laser, beauté des mains et pieds, microshading et cils.",
     "display_order": 3,
     "is_active": true
   },
   {
-    "id": "demo-cat-epilation-laser",
-    "name": "Épilation laser diode",
-    "slug": "epilation-laser",
-    "description": "Épilation laser diode femme, homme et forfaits.",
+    "id": "demo-univers-bouger-douceur",
+    "name": "Bouger en douceur",
+    "slug": "bouger-en-douceur",
+    "description": "Aqua-bike, aqua-gym et éveil aquatique pour se tonifier sans impact brutal.",
     "display_order": 4,
-    "is_active": true
-  },
-  {
-    "id": "demo-cat-beaute-mains-pieds",
-    "name": "Beauté mains & pieds",
-    "slug": "beaute-mains-pieds",
-    "description": "Manucure, pédicure, semi-permanent et déposes.",
-    "display_order": 5,
-    "is_active": true
-  },
-  {
-    "id": "demo-cat-gommages-corporels",
-    "name": "Gommages corporels",
-    "slug": "gommages-corporels",
-    "description": "Gommages Myspa, Thalgo, minceur et savon noir.",
-    "display_order": 6,
-    "is_active": true
-  },
-  {
-    "id": "demo-cat-massages",
-    "name": "Massages & modelages",
-    "slug": "massages",
-    "description": "Massages du monde, modelages, drainage et soins à la carte.",
-    "display_order": 7,
-    "is_active": true
-  },
-  {
-    "id": "demo-cat-soins-minceur",
-    "name": "Soins minceur",
-    "slug": "soins-minceur",
-    "description": "Madérothérapie, forfaits silhouette et jambes légères.",
-    "display_order": 8,
-    "is_active": true
-  },
-  {
-    "id": "demo-cat-aqua-sports",
-    "name": "Aqua-sports",
-    "slug": "aqua-sports",
-    "description": "Aquabike, aquagym et éveil aquatique.",
-    "display_order": 9,
-    "is_active": true
-  },
-  {
-    "id": "demo-cat-coffrets-bien-etre",
-    "name": "Coffrets bien-être",
-    "slug": "coffrets-bien-etre",
-    "description": "Coffrets, escales et formules cadeaux.",
-    "display_order": 10,
     "is_active": true
   }
 ];
@@ -88,10 +40,10 @@ const categoryBySlug = Object.fromEntries(demoCategories.map((category) => [cate
 const rawServices = [
   {
     "id": "demo-service-001",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin fondamental flash coup d’éclat",
     "slug": "soin-fondamental-flash-coup-d-eclat",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin fondamental flash coup d’éclat.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin fondamental flash coup d’éclat.",
     "duration_minutes": 60,
     "price_cents": 5500,
@@ -105,14 +57,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": true,
     "is_active": true,
-    "display_order": 1
+    "display_order": 1,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-002",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin pureté peaux mixtes et grasses",
     "slug": "soin-purete-peaux-mixtes-et-grasses",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin pureté peaux mixtes et grasses.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin pureté peaux mixtes et grasses.",
     "duration_minutes": 60,
     "price_cents": 6500,
@@ -126,14 +80,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 2
+    "display_order": 2,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-003",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin Cold Cream peaux sèches & sensibles",
     "slug": "soin-cold-cream-peaux-seches-sensibles",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin Cold Cream peaux sèches & sensibles.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin Cold Cream peaux sèches & sensibles.",
     "duration_minutes": 60,
     "price_cents": 6500,
@@ -147,14 +103,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 3
+    "display_order": 3,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-004",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin Océan Men",
     "slug": "soin-ocean-men",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin Océan Men.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin Océan Men.",
     "duration_minutes": 60,
     "price_cents": 7000,
@@ -168,14 +126,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 4
+    "display_order": 4,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-005",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin lumière éclaircissant",
     "slug": "soin-lumiere-eclaircissant",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin lumière éclaircissant.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin lumière éclaircissant.",
     "duration_minutes": 90,
     "price_cents": 7000,
@@ -189,14 +149,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 5
+    "display_order": 5,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-006",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin peeling marin",
     "slug": "soin-peeling-marin",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin peeling marin.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin peeling marin.",
     "duration_minutes": 90,
     "price_cents": 7000,
@@ -210,14 +172,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 6
+    "display_order": 6,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-007",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin madérothérapie faciale cernes & poches",
     "slug": "soin-maderotherapie-faciale-cernes-poches",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin madérothérapie faciale cernes & poches.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin madérothérapie faciale cernes & poches.",
     "duration_minutes": 90,
     "price_cents": 6500,
@@ -231,14 +195,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 7
+    "display_order": 7,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-008",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin spiruline boost",
     "slug": "soin-spiruline-boost",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin spiruline boost.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin spiruline boost.",
     "duration_minutes": 90,
     "price_cents": 7500,
@@ -252,14 +218,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 8
+    "display_order": 8,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-009",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin hyaluronique pro-collagène",
     "slug": "soin-hyaluronique-pro-collagene",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin hyaluronique pro-collagène.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin hyaluronique pro-collagène.",
     "duration_minutes": 90,
     "price_cents": 8500,
@@ -273,14 +241,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": true,
     "is_active": true,
-    "display_order": 9
+    "display_order": 9,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-010",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin silicium lift",
     "slug": "soin-silicium-lift",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin silicium lift.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin silicium lift.",
     "duration_minutes": 90,
     "price_cents": 8500,
@@ -294,14 +264,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 10
+    "display_order": 10,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-011",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Soin exception marine",
     "slug": "soin-exception-marine",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin exception marine.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin exception marine.",
     "duration_minutes": 90,
     "price_cents": 12000,
@@ -313,16 +285,18 @@ const rawServices = [
     "deposit_cents": 0,
     "image_url": "https://www.estheticdiamonds.fr/ressources/images/Image-fx-1_3b15_lg.jpeg",
     "contraindications": null,
-    "is_featured": true,
+    "is_featured": false,
     "is_active": true,
-    "display_order": 11
+    "display_order": 11,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-012",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Microneedling esthétique visage",
     "slug": "microneedling-esthetique-visage",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Microneedling esthétique visage.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Microneedling esthétique visage.",
     "duration_minutes": 75,
     "price_cents": 11760,
@@ -336,14 +310,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 12
+    "display_order": 12,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-013",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Forfait 6 séances microneedling visage",
     "slug": "forfait-6-seances-microneedling-visage",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait 6 séances microneedling visage.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait 6 séances microneedling visage.",
     "duration_minutes": 75,
     "price_cents": 70000,
@@ -357,14 +333,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 13
+    "display_order": 13,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-014",
-    "categorySlug": "soins-visage",
+    "categorySlug": "sublimer-la-peau",
     "name": "Luminothérapie + diffusion de sérum",
     "slug": "luminotherapie-diffusion-de-serum",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Luminothérapie + diffusion de sérum.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Luminothérapie + diffusion de sérum.",
     "duration_minutes": 30,
     "price_cents": 5000,
@@ -378,14 +356,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 14
+    "display_order": 14,
+    "originalCategorySlug": "soins-visage",
+    "original_category_label": "Soins visage"
   },
   {
     "id": "demo-service-015",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Microshading",
     "slug": "microshading",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Microshading.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Microshading.",
     "duration_minutes": 120,
     "price_cents": 25000,
@@ -399,14 +379,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": true,
     "is_active": true,
-    "display_order": 15
+    "display_order": 15,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-016",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Retouche microshading 1 à 6 mois",
     "slug": "retouche-microshading-1-a-6-mois",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Retouche microshading 1 à 6 mois.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Retouche microshading 1 à 6 mois.",
     "duration_minutes": 75,
     "price_cents": 8000,
@@ -420,14 +402,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 16
+    "display_order": 16,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-017",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Retouche annuelle microshading",
     "slug": "retouche-annuelle-microshading",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Retouche annuelle microshading.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Retouche annuelle microshading.",
     "duration_minutes": 90,
     "price_cents": 12000,
@@ -441,14 +425,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 17
+    "display_order": 17,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-018",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Teinture sourcils épilation + coloration",
     "slug": "teinture-sourcils-epilation-coloration",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Teinture sourcils épilation + coloration.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Teinture sourcils épilation + coloration.",
     "duration_minutes": 30,
     "price_cents": 2500,
@@ -462,14 +448,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 18
+    "display_order": 18,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-019",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Détatouage sourcils no laser — 1ère séance",
     "slug": "detatouage-sourcils-no-laser-1ere-seance",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Détatouage sourcils no laser — 1ère séance.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Détatouage sourcils no laser — 1ère séance.",
     "duration_minutes": 60,
     "price_cents": 12000,
@@ -483,14 +471,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 19
+    "display_order": 19,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-020",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Détatouage sourcils no laser — 2ème séance",
     "slug": "detatouage-sourcils-no-laser-2eme-seance",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Détatouage sourcils no laser — 2ème séance.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Détatouage sourcils no laser — 2ème séance.",
     "duration_minutes": 60,
     "price_cents": 7000,
@@ -504,14 +494,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 20
+    "display_order": 20,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-021",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Extension de cils pose complète cil à cil",
     "slug": "extension-de-cils-pose-complete-cil-a-cil",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Extension de cils pose complète cil à cil.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Extension de cils pose complète cil à cil.",
     "duration_minutes": 120,
     "price_cents": 8000,
@@ -525,14 +517,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 21
+    "display_order": 21,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-022",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Extension de cils pose complète volume russe",
     "slug": "extension-de-cils-pose-complete-volume-russe",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Extension de cils pose complète volume russe.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Extension de cils pose complète volume russe.",
     "duration_minutes": 150,
     "price_cents": 10000,
@@ -544,16 +538,18 @@ const rawServices = [
     "deposit_cents": 0,
     "image_url": "https://www.estheticdiamonds.fr/ressources/images/Image-fx-1_3b15_lg.jpeg",
     "contraindications": null,
-    "is_featured": true,
+    "is_featured": false,
     "is_active": true,
-    "display_order": 22
+    "display_order": 22,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-023",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Extension de cils pose complète mixte",
     "slug": "extension-de-cils-pose-complete-mixte",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Extension de cils pose complète mixte.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Extension de cils pose complète mixte.",
     "duration_minutes": 135,
     "price_cents": 9000,
@@ -567,14 +563,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 23
+    "display_order": 23,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-024",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Remplissage cils 2 semaines — cil à cil",
     "slug": "remplissage-cils-2-semaines-cil-a-cil",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 2 semaines — cil à cil.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 2 semaines — cil à cil.",
     "duration_minutes": 60,
     "price_cents": 4000,
@@ -588,14 +586,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 24
+    "display_order": 24,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-025",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Remplissage cils 2 semaines — volume russe",
     "slug": "remplissage-cils-2-semaines-volume-russe",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 2 semaines — volume russe.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 2 semaines — volume russe.",
     "duration_minutes": 75,
     "price_cents": 5000,
@@ -609,14 +609,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 25
+    "display_order": 25,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-026",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Remplissage cils 2 semaines — pose mixte",
     "slug": "remplissage-cils-2-semaines-pose-mixte",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 2 semaines — pose mixte.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 2 semaines — pose mixte.",
     "duration_minutes": 60,
     "price_cents": 3500,
@@ -630,14 +632,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 26
+    "display_order": 26,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-027",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Remplissage cils 3 semaines — cil à cil",
     "slug": "remplissage-cils-3-semaines-cil-a-cil",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 3 semaines — cil à cil.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 3 semaines — cil à cil.",
     "duration_minutes": 75,
     "price_cents": 5000,
@@ -651,14 +655,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 27
+    "display_order": 27,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-028",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Remplissage cils 3 semaines — volume russe",
     "slug": "remplissage-cils-3-semaines-volume-russe",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 3 semaines — volume russe.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 3 semaines — volume russe.",
     "duration_minutes": 90,
     "price_cents": 8000,
@@ -672,14 +678,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 28
+    "display_order": 28,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-029",
-    "categorySlug": "microshading-cils",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Remplissage cils 3 semaines — pose mixte",
     "slug": "remplissage-cils-3-semaines-pose-mixte",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 3 semaines — pose mixte.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Remplissage cils 3 semaines — pose mixte.",
     "duration_minutes": 90,
     "price_cents": 7000,
@@ -693,14 +701,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 29
+    "display_order": 29,
+    "originalCategorySlug": "microshading-cils",
+    "original_category_label": "Microshading & cils"
   },
   {
     "id": "demo-service-030",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — entretien sourcils",
     "slug": "cire-femme-entretien-sourcils",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — entretien sourcils.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — entretien sourcils.",
     "duration_minutes": 40,
     "price_cents": 1000,
@@ -714,14 +724,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 30
+    "display_order": 30,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-031",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — création ligne de sourcils",
     "slug": "cire-femme-creation-ligne-de-sourcils",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — création ligne de sourcils.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — création ligne de sourcils.",
     "duration_minutes": 40,
     "price_cents": 1200,
@@ -735,14 +747,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 31
+    "display_order": 31,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-032",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — création ligne sourcils à la pince",
     "slug": "cire-femme-creation-ligne-sourcils-a-la-pince",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — création ligne sourcils à la pince.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — création ligne sourcils à la pince.",
     "duration_minutes": 40,
     "price_cents": 1700,
@@ -756,14 +770,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 32
+    "display_order": 32,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-033",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — visage",
     "slug": "cire-femme-visage",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — visage.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — visage.",
     "duration_minutes": 40,
     "price_cents": 2500,
@@ -777,14 +793,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 33
+    "display_order": 33,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-034",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — lèvre supérieure",
     "slug": "cire-femme-levre-superieure",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — lèvre supérieure.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — lèvre supérieure.",
     "duration_minutes": 40,
     "price_cents": 1000,
@@ -798,14 +816,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 34
+    "display_order": 34,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-035",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — nez",
     "slug": "cire-femme-nez",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — nez.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — nez.",
     "duration_minutes": 40,
     "price_cents": 1500,
@@ -819,14 +839,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 35
+    "display_order": 35,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-036",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — menton",
     "slug": "cire-femme-menton",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — menton.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — menton.",
     "duration_minutes": 40,
     "price_cents": 1200,
@@ -840,14 +862,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 36
+    "display_order": 36,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-037",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — orteils",
     "slug": "cire-femme-orteils",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — orteils.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — orteils.",
     "duration_minutes": 40,
     "price_cents": 1500,
@@ -861,14 +885,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 37
+    "display_order": 37,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-038",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — aisselles",
     "slug": "cire-femme-aisselles",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — aisselles.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — aisselles.",
     "duration_minutes": 40,
     "price_cents": 1500,
@@ -882,14 +908,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 38
+    "display_order": 38,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-039",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — 1/2 jambes",
     "slug": "cire-femme-1-2-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — 1/2 jambes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — 1/2 jambes.",
     "duration_minutes": 40,
     "price_cents": 2200,
@@ -903,14 +931,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 39
+    "display_order": 39,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-040",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — jambes entières",
     "slug": "cire-femme-jambes-entieres",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — jambes entières.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — jambes entières.",
     "duration_minutes": 40,
     "price_cents": 3000,
@@ -924,14 +954,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 40
+    "display_order": 40,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-041",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — maillot simple",
     "slug": "cire-femme-maillot-simple",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — maillot simple.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — maillot simple.",
     "duration_minutes": 40,
     "price_cents": 2000,
@@ -945,14 +977,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 41
+    "display_order": 41,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-042",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — maillot brésilien",
     "slug": "cire-femme-maillot-bresilien",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — maillot brésilien.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — maillot brésilien.",
     "duration_minutes": 40,
     "price_cents": 2500,
@@ -966,14 +1000,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 42
+    "display_order": 42,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-043",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — maillot semi-intégral",
     "slug": "cire-femme-maillot-semi-integral",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — maillot semi-intégral.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — maillot semi-intégral.",
     "duration_minutes": 40,
     "price_cents": 2800,
@@ -987,14 +1023,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 43
+    "display_order": 43,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-044",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — maillot intégral",
     "slug": "cire-femme-maillot-integral",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — maillot intégral.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — maillot intégral.",
     "duration_minutes": 40,
     "price_cents": 3200,
@@ -1008,14 +1046,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 44
+    "display_order": 44,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-045",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — fesses",
     "slug": "cire-femme-fesses",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — fesses.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — fesses.",
     "duration_minutes": 40,
     "price_cents": 1500,
@@ -1029,14 +1069,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 45
+    "display_order": 45,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-046",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire femme — sillon fessier",
     "slug": "cire-femme-sillon-fessier",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire femme — sillon fessier.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire femme — sillon fessier.",
     "duration_minutes": 40,
     "price_cents": 1200,
@@ -1050,14 +1092,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 46
+    "display_order": 46,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-047",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — sourcils",
     "slug": "cire-homme-sourcils",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — sourcils.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — sourcils.",
     "duration_minutes": 40,
     "price_cents": 1500,
@@ -1071,14 +1115,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 47
+    "display_order": 47,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-048",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — oreilles",
     "slug": "cire-homme-oreilles",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — oreilles.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — oreilles.",
     "duration_minutes": 40,
     "price_cents": 2000,
@@ -1092,14 +1138,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 48
+    "display_order": 48,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-049",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — aisselles",
     "slug": "cire-homme-aisselles",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — aisselles.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — aisselles.",
     "duration_minutes": 40,
     "price_cents": 2500,
@@ -1113,14 +1161,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 49
+    "display_order": 49,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-050",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — barbe faible pilosité",
     "slug": "cire-homme-barbe-faible-pilosite",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — barbe faible pilosité.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — barbe faible pilosité.",
     "duration_minutes": 40,
     "price_cents": 2500,
@@ -1134,14 +1184,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 50
+    "display_order": 50,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-051",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — barbe forte pilosité",
     "slug": "cire-homme-barbe-forte-pilosite",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — barbe forte pilosité.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — barbe forte pilosité.",
     "duration_minutes": 40,
     "price_cents": 4000,
@@ -1155,14 +1207,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 51
+    "display_order": 51,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-052",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — nez",
     "slug": "cire-homme-nez",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — nez.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — nez.",
     "duration_minutes": 40,
     "price_cents": 2000,
@@ -1176,14 +1230,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 52
+    "display_order": 52,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-053",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — orteils",
     "slug": "cire-homme-orteils",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — orteils.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — orteils.",
     "duration_minutes": 40,
     "price_cents": 2000,
@@ -1197,14 +1253,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 53
+    "display_order": 53,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-054",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — bras",
     "slug": "cire-homme-bras",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — bras.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — bras.",
     "duration_minutes": 40,
     "price_cents": 3000,
@@ -1218,14 +1276,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 54
+    "display_order": 54,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-055",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — torse",
     "slug": "cire-homme-torse",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — torse.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — torse.",
     "duration_minutes": 40,
     "price_cents": 2500,
@@ -1239,14 +1299,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 55
+    "display_order": 55,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-056",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — épaules",
     "slug": "cire-homme-epaules",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — épaules.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — épaules.",
     "duration_minutes": 40,
     "price_cents": 2000,
@@ -1260,14 +1322,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 56
+    "display_order": 56,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-057",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — dos",
     "slug": "cire-homme-dos",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — dos.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — dos.",
     "duration_minutes": 40,
     "price_cents": 3000,
@@ -1281,14 +1345,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 57
+    "display_order": 57,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-058",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — cuisses",
     "slug": "cire-homme-cuisses",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — cuisses.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — cuisses.",
     "duration_minutes": 40,
     "price_cents": 3500,
@@ -1302,14 +1368,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 58
+    "display_order": 58,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-059",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — 1/2 jambes",
     "slug": "cire-homme-1-2-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — 1/2 jambes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — 1/2 jambes.",
     "duration_minutes": 40,
     "price_cents": 3000,
@@ -1323,14 +1391,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 59
+    "display_order": 59,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-060",
-    "categorySlug": "epilation-cire",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Cire homme — jambes entières",
     "slug": "cire-homme-jambes-entieres",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Cire homme — jambes entières.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Cire homme — jambes entières.",
     "duration_minutes": 40,
     "price_cents": 4500,
@@ -1344,14 +1414,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 60
+    "display_order": 60,
+    "originalCategorySlug": "epilation-cire",
+    "original_category_label": "Épilation cire"
   },
   {
     "id": "demo-service-061",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser femme visage — lèvres supérieures",
     "slug": "laser-femme-visage-levres-superieures",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser femme visage — lèvres supérieures.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser femme visage — lèvres supérieures.",
     "duration_minutes": 60,
     "price_cents": 5000,
@@ -1365,14 +1437,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 61
+    "display_order": 61,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-062",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser femme visage — menton",
     "slug": "laser-femme-visage-menton",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser femme visage — menton.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser femme visage — menton.",
     "duration_minutes": 60,
     "price_cents": 5000,
@@ -1386,14 +1460,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 62
+    "display_order": 62,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-063",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser femme visage — lèvres supérieures + menton",
     "slug": "laser-femme-visage-levres-superieures-menton",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser femme visage — lèvres supérieures + menton.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser femme visage — lèvres supérieures + menton.",
     "duration_minutes": 60,
     "price_cents": 8000,
@@ -1407,14 +1483,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 63
+    "display_order": 63,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-064",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser femme visage — joues",
     "slug": "laser-femme-visage-joues",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser femme visage — joues.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser femme visage — joues.",
     "duration_minutes": 60,
     "price_cents": 8000,
@@ -1428,14 +1506,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 64
+    "display_order": 64,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-065",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser femme corps — aisselles",
     "slug": "laser-femme-corps-aisselles",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — aisselles.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — aisselles.",
     "duration_minutes": 60,
     "price_cents": 8000,
@@ -1449,14 +1529,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": true,
     "is_active": true,
-    "display_order": 65
+    "display_order": 65,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-066",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser femme corps — maillot simple",
     "slug": "laser-femme-corps-maillot-simple",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — maillot simple.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — maillot simple.",
     "duration_minutes": 60,
     "price_cents": 12000,
@@ -1470,14 +1552,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 66
+    "display_order": 66,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-067",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser femme corps — maillot intégral",
     "slug": "laser-femme-corps-maillot-integral",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — maillot intégral.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — maillot intégral.",
     "duration_minutes": 60,
     "price_cents": 18000,
@@ -1491,14 +1575,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 67
+    "display_order": 67,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-068",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser femme corps — sillon interfessier",
     "slug": "laser-femme-corps-sillon-interfessier",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — sillon interfessier.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — sillon interfessier.",
     "duration_minutes": 60,
     "price_cents": 6000,
@@ -1512,14 +1598,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 68
+    "display_order": 68,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-069",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser femme corps — 1/2 jambes",
     "slug": "laser-femme-corps-1-2-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — 1/2 jambes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — 1/2 jambes.",
     "duration_minutes": 60,
     "price_cents": 10000,
@@ -1533,14 +1621,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 69
+    "display_order": 69,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-070",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser femme corps — jambes complètes",
     "slug": "laser-femme-corps-jambes-completes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — jambes complètes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser femme corps — jambes complètes.",
     "duration_minutes": 60,
     "price_cents": 18000,
@@ -1554,14 +1644,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 70
+    "display_order": 70,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-071",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser femme — aisselles + maillot simple",
     "slug": "forfait-laser-femme-aisselles-maillot-simple",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + maillot simple.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + maillot simple.",
     "duration_minutes": 60,
     "price_cents": 18000,
@@ -1575,14 +1667,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 71
+    "display_order": 71,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-072",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser femme — aisselles + maillot simple + 1/2 jambes",
     "slug": "forfait-laser-femme-aisselles-maillot-simple-1-2-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + maillot simple + 1/2 jambes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + maillot simple + 1/2 jambes.",
     "duration_minutes": 60,
     "price_cents": 28000,
@@ -1596,14 +1690,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 72
+    "display_order": 72,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-073",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser femme — aisselles + maillot simple + jambes entières",
     "slug": "forfait-laser-femme-aisselles-maillot-simple-jambes-entieres",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + maillot simple + jambes entières.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + maillot simple + jambes entières.",
     "duration_minutes": 60,
     "price_cents": 36000,
@@ -1617,14 +1713,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 73
+    "display_order": 73,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-074",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser femme — aisselles + maillot intégral",
     "slug": "forfait-laser-femme-aisselles-maillot-integral",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + maillot intégral.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + maillot intégral.",
     "duration_minutes": 60,
     "price_cents": 24000,
@@ -1638,14 +1736,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 74
+    "display_order": 74,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-075",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser femme — aisselles + maillot intégral + sillon interfessier",
     "slug": "forfait-laser-femme-aisselles-maillot-integral-sillon-interfessier",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + maillot intégral + sillon interfessier.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + maillot intégral + sillon interfessier.",
     "duration_minutes": 60,
     "price_cents": 30000,
@@ -1659,14 +1759,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 75
+    "display_order": 75,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-076",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser femme — aisselles + 1/2 jambes",
     "slug": "forfait-laser-femme-aisselles-1-2-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + 1/2 jambes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + 1/2 jambes.",
     "duration_minutes": 60,
     "price_cents": 16000,
@@ -1680,14 +1782,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 76
+    "display_order": 76,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-077",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser femme — aisselles + jambes complètes",
     "slug": "forfait-laser-femme-aisselles-jambes-completes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + jambes complètes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser femme — aisselles + jambes complètes.",
     "duration_minutes": 60,
     "price_cents": 24000,
@@ -1701,14 +1805,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 77
+    "display_order": 77,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-078",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme visage — moustache",
     "slug": "laser-homme-visage-moustache",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme visage — moustache.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme visage — moustache.",
     "duration_minutes": 60,
     "price_cents": 6000,
@@ -1722,14 +1828,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 78
+    "display_order": 78,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-079",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme visage — barbe",
     "slug": "laser-homme-visage-barbe",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme visage — barbe.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme visage — barbe.",
     "duration_minutes": 60,
     "price_cents": 7500,
@@ -1743,14 +1851,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 79
+    "display_order": 79,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-080",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme visage — pommettes",
     "slug": "laser-homme-visage-pommettes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme visage — pommettes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme visage — pommettes.",
     "duration_minutes": 60,
     "price_cents": 8000,
@@ -1764,14 +1874,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 80
+    "display_order": 80,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-081",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme visage — nuque",
     "slug": "laser-homme-visage-nuque",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme visage — nuque.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme visage — nuque.",
     "duration_minutes": 60,
     "price_cents": 6000,
@@ -1785,14 +1897,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 81
+    "display_order": 81,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-082",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme visage — collier",
     "slug": "laser-homme-visage-collier",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme visage — collier.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme visage — collier.",
     "duration_minutes": 60,
     "price_cents": 8000,
@@ -1806,14 +1920,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 82
+    "display_order": 82,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-083",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme corps — avant-bras",
     "slug": "laser-homme-corps-avant-bras",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — avant-bras.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — avant-bras.",
     "duration_minutes": 60,
     "price_cents": 9000,
@@ -1827,14 +1943,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 83
+    "display_order": 83,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-084",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme corps — bras",
     "slug": "laser-homme-corps-bras",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — bras.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — bras.",
     "duration_minutes": 60,
     "price_cents": 18000,
@@ -1848,14 +1966,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 84
+    "display_order": 84,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-085",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme corps — torse",
     "slug": "laser-homme-corps-torse",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — torse.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — torse.",
     "duration_minutes": 60,
     "price_cents": 18000,
@@ -1869,14 +1989,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 85
+    "display_order": 85,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-086",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme corps — abdomen",
     "slug": "laser-homme-corps-abdomen",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — abdomen.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — abdomen.",
     "duration_minutes": 60,
     "price_cents": 15000,
@@ -1890,14 +2012,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 86
+    "display_order": 86,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-087",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme corps — épaules seules",
     "slug": "laser-homme-corps-epaules-seules",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — épaules seules.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — épaules seules.",
     "duration_minutes": 60,
     "price_cents": 14000,
@@ -1911,14 +2035,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 87
+    "display_order": 87,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-088",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme corps — dos hors épaules",
     "slug": "laser-homme-corps-dos-hors-epaules",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — dos hors épaules.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — dos hors épaules.",
     "duration_minutes": 60,
     "price_cents": 18000,
@@ -1932,14 +2058,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 88
+    "display_order": 88,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-089",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme corps — 1/2 jambes",
     "slug": "laser-homme-corps-1-2-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — 1/2 jambes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — 1/2 jambes.",
     "duration_minutes": 60,
     "price_cents": 25000,
@@ -1953,14 +2081,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 89
+    "display_order": 89,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-090",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Laser homme corps — jambes complètes",
     "slug": "laser-homme-corps-jambes-completes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — jambes complètes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Laser homme corps — jambes complètes.",
     "duration_minutes": 60,
     "price_cents": 35000,
@@ -1974,14 +2104,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 90
+    "display_order": 90,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-091",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — avant-bras + torse",
     "slug": "forfait-laser-homme-avant-bras-torse",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — avant-bras + torse.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — avant-bras + torse.",
     "duration_minutes": 60,
     "price_cents": 25000,
@@ -1995,14 +2127,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 91
+    "display_order": 91,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-092",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — avant-bras + abdomen",
     "slug": "forfait-laser-homme-avant-bras-abdomen",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — avant-bras + abdomen.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — avant-bras + abdomen.",
     "duration_minutes": 60,
     "price_cents": 22000,
@@ -2016,14 +2150,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 92
+    "display_order": 92,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-093",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — bras + torse",
     "slug": "forfait-laser-homme-bras-torse",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — bras + torse.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — bras + torse.",
     "duration_minutes": 60,
     "price_cents": 34000,
@@ -2037,14 +2173,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 93
+    "display_order": 93,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-094",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — bras + abdomen",
     "slug": "forfait-laser-homme-bras-abdomen",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — bras + abdomen.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — bras + abdomen.",
     "duration_minutes": 60,
     "price_cents": 31000,
@@ -2058,14 +2196,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 94
+    "display_order": 94,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-095",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — bras + torse + abdomen",
     "slug": "forfait-laser-homme-bras-torse-abdomen",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — bras + torse + abdomen.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — bras + torse + abdomen.",
     "duration_minutes": 60,
     "price_cents": 31000,
@@ -2079,14 +2219,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 95
+    "display_order": 95,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-096",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — torse + épaules + abdomen",
     "slug": "forfait-laser-homme-torse-epaules-abdomen",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — torse + épaules + abdomen.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — torse + épaules + abdomen.",
     "duration_minutes": 60,
     "price_cents": 45000,
@@ -2100,14 +2242,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 96
+    "display_order": 96,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-097",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — torse + abdomen + dos",
     "slug": "forfait-laser-homme-torse-abdomen-dos",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — torse + abdomen + dos.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — torse + abdomen + dos.",
     "duration_minutes": 60,
     "price_cents": 49500,
@@ -2121,14 +2265,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 97
+    "display_order": 97,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-098",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — torse + abdomen + dos + épaules",
     "slug": "forfait-laser-homme-torse-abdomen-dos-epaules",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — torse + abdomen + dos + épaules.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — torse + abdomen + dos + épaules.",
     "duration_minutes": 60,
     "price_cents": 60000,
@@ -2142,14 +2288,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 98
+    "display_order": 98,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-099",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — bras + 1/2 jambes",
     "slug": "forfait-laser-homme-bras-1-2-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — bras + 1/2 jambes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — bras + 1/2 jambes.",
     "duration_minutes": 60,
     "price_cents": 41000,
@@ -2163,14 +2311,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 99
+    "display_order": 99,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-100",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — torse + jambes complètes",
     "slug": "forfait-laser-homme-torse-jambes-completes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — torse + jambes complètes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — torse + jambes complètes.",
     "duration_minutes": 60,
     "price_cents": 51000,
@@ -2184,14 +2334,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 100
+    "display_order": 100,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-101",
-    "categorySlug": "epilation-laser",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Forfait laser homme — torse + dos + jambes complètes",
     "slug": "forfait-laser-homme-torse-dos-jambes-completes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — torse + dos + jambes complètes.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait laser homme — torse + dos + jambes complètes.",
     "duration_minutes": 60,
     "price_cents": 69000,
@@ -2205,14 +2357,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 101
+    "display_order": 101,
+    "originalCategorySlug": "epilation-laser",
+    "original_category_label": "Épilation laser diode"
   },
   {
     "id": "demo-service-102",
-    "categorySlug": "beaute-mains-pieds",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Beauté des pieds simple",
     "slug": "beaute-des-pieds-simple",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Beauté des pieds simple.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Beauté des pieds simple.",
     "duration_minutes": 45,
     "price_cents": 3500,
@@ -2226,14 +2380,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 102
+    "display_order": 102,
+    "originalCategorySlug": "beaute-mains-pieds",
+    "original_category_label": "Beauté mains & pieds"
   },
   {
     "id": "demo-service-103",
-    "categorySlug": "beaute-mains-pieds",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Beauté des pieds premium",
     "slug": "beaute-des-pieds-premium",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Beauté des pieds premium.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Beauté des pieds premium.",
     "duration_minutes": 60,
     "price_cents": 4500,
@@ -2245,16 +2401,18 @@ const rawServices = [
     "deposit_cents": 0,
     "image_url": "https://www.estheticdiamonds.fr/ressources/images/Image-fx-1_3b15_lg.jpeg",
     "contraindications": null,
-    "is_featured": true,
+    "is_featured": false,
     "is_active": true,
-    "display_order": 103
+    "display_order": 103,
+    "originalCategorySlug": "beaute-mains-pieds",
+    "original_category_label": "Beauté mains & pieds"
   },
   {
     "id": "demo-service-104",
-    "categorySlug": "beaute-mains-pieds",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Beauté des mains simple",
     "slug": "beaute-des-mains-simple",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Beauté des mains simple.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Beauté des mains simple.",
     "duration_minutes": 45,
     "price_cents": 3500,
@@ -2268,14 +2426,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 104
+    "display_order": 104,
+    "originalCategorySlug": "beaute-mains-pieds",
+    "original_category_label": "Beauté mains & pieds"
   },
   {
     "id": "demo-service-105",
-    "categorySlug": "beaute-mains-pieds",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Beauté des mains premium",
     "slug": "beaute-des-mains-premium",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Beauté des mains premium.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Beauté des mains premium.",
     "duration_minutes": 60,
     "price_cents": 4500,
@@ -2287,16 +2447,18 @@ const rawServices = [
     "deposit_cents": 0,
     "image_url": "https://www.estheticdiamonds.fr/ressources/images/Image-fx-1_3b15_lg.jpeg",
     "contraindications": null,
-    "is_featured": true,
+    "is_featured": false,
     "is_active": true,
-    "display_order": 105
+    "display_order": 105,
+    "originalCategorySlug": "beaute-mains-pieds",
+    "original_category_label": "Beauté mains & pieds"
   },
   {
     "id": "demo-service-106",
-    "categorySlug": "beaute-mains-pieds",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "French manucure",
     "slug": "french-manucure",
-    "short_description": "Prestation Esthetic Diamonds & Spa — French manucure.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — French manucure.",
     "duration_minutes": 45,
     "price_cents": 3000,
@@ -2310,14 +2472,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 106
+    "display_order": 106,
+    "originalCategorySlug": "beaute-mains-pieds",
+    "original_category_label": "Beauté mains & pieds"
   },
   {
     "id": "demo-service-107",
-    "categorySlug": "beaute-mains-pieds",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Chablon acrylique pieds",
     "slug": "chablon-acrylique-pieds",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Chablon acrylique pieds.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Chablon acrylique pieds.",
     "duration_minutes": 75,
     "price_cents": 5500,
@@ -2331,14 +2495,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 107
+    "display_order": 107,
+    "originalCategorySlug": "beaute-mains-pieds",
+    "original_category_label": "Beauté mains & pieds"
   },
   {
     "id": "demo-service-108",
-    "categorySlug": "beaute-mains-pieds",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Pose de semi-permanent",
     "slug": "pose-de-semi-permanent",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Pose de semi-permanent.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Pose de semi-permanent.",
     "duration_minutes": 35,
     "price_cents": 2200,
@@ -2352,14 +2518,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 108
+    "display_order": 108,
+    "originalCategorySlug": "beaute-mains-pieds",
+    "original_category_label": "Beauté mains & pieds"
   },
   {
     "id": "demo-service-109",
-    "categorySlug": "beaute-mains-pieds",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Dépose de semi-permanent",
     "slug": "depose-de-semi-permanent",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Dépose de semi-permanent.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Dépose de semi-permanent.",
     "duration_minutes": 30,
     "price_cents": 2200,
@@ -2373,14 +2541,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 109
+    "display_order": 109,
+    "originalCategorySlug": "beaute-mains-pieds",
+    "original_category_label": "Beauté mains & pieds"
   },
   {
     "id": "demo-service-110",
-    "categorySlug": "beaute-mains-pieds",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Dépose de semi-permanent clientes fidèles",
     "slug": "depose-de-semi-permanent-clientes-fideles",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Dépose de semi-permanent clientes fidèles.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Dépose de semi-permanent clientes fidèles.",
     "duration_minutes": 30,
     "price_cents": 1500,
@@ -2394,14 +2564,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 110
+    "display_order": 110,
+    "originalCategorySlug": "beaute-mains-pieds",
+    "original_category_label": "Beauté mains & pieds"
   },
   {
     "id": "demo-service-111",
-    "categorySlug": "beaute-mains-pieds",
+    "categorySlug": "se-sentir-nette-et-confiante",
     "name": "Dépose de capsules + soins",
     "slug": "depose-de-capsules-soins",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Dépose de capsules + soins.",
+    "short_description": "Pour se sentir nette, soignée, féminine et confiante au quotidien.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Dépose de capsules + soins.",
     "duration_minutes": 45,
     "price_cents": 3500,
@@ -2415,14 +2587,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 111
+    "display_order": 111,
+    "originalCategorySlug": "beaute-mains-pieds",
+    "original_category_label": "Beauté mains & pieds"
   },
   {
     "id": "demo-service-112",
-    "categorySlug": "gommages-corporels",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Gommage corporel Myspa",
     "slug": "gommage-corporel-myspa",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Gommage corporel Myspa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Gommage corporel Myspa.",
     "duration_minutes": 40,
     "price_cents": 3700,
@@ -2436,14 +2610,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 112
+    "display_order": 112,
+    "originalCategorySlug": "gommages-corporels",
+    "original_category_label": "Gommages corporels"
   },
   {
     "id": "demo-service-113",
-    "categorySlug": "gommages-corporels",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Gommage corporel Thalgo",
     "slug": "gommage-corporel-thalgo",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Gommage corporel Thalgo.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Gommage corporel Thalgo.",
     "duration_minutes": 40,
     "price_cents": 3500,
@@ -2457,14 +2633,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 113
+    "display_order": 113,
+    "originalCategorySlug": "gommages-corporels",
+    "original_category_label": "Gommages corporels"
   },
   {
     "id": "demo-service-114",
-    "categorySlug": "gommages-corporels",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Gommage minceur",
     "slug": "gommage-minceur",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Gommage minceur.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Gommage minceur.",
     "duration_minutes": 40,
     "price_cents": 4000,
@@ -2478,14 +2656,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 114
+    "display_order": 114,
+    "originalCategorySlug": "gommages-corporels",
+    "original_category_label": "Gommages corporels"
   },
   {
     "id": "demo-service-115",
-    "categorySlug": "gommages-corporels",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Gommage au savon noir + gant de Kessa",
     "slug": "gommage-au-savon-noir-gant-de-kessa",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Gommage au savon noir + gant de Kessa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Gommage au savon noir + gant de Kessa.",
     "duration_minutes": 40,
     "price_cents": 4000,
@@ -2499,14 +2679,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 115
+    "display_order": 115,
+    "originalCategorySlug": "gommages-corporels",
+    "original_category_label": "Gommages corporels"
   },
   {
     "id": "demo-service-116",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Presso-esthétique jambes",
     "slug": "presso-esthetique-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Presso-esthétique jambes.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Presso-esthétique jambes.",
     "duration_minutes": 30,
     "price_cents": 4000,
@@ -2520,14 +2702,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 116
+    "display_order": 116,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-117",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Presso-esthétique ventre",
     "slug": "presso-esthetique-ventre",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Presso-esthétique ventre.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Presso-esthétique ventre.",
     "duration_minutes": 30,
     "price_cents": 3000,
@@ -2541,14 +2725,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 117
+    "display_order": 117,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-118",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Sauna infrarouge 20 min",
     "slug": "sauna-infrarouge-20-min",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Sauna infrarouge 20 min.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Sauna infrarouge 20 min.",
     "duration_minutes": 20,
     "price_cents": 2000,
@@ -2562,14 +2748,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 118
+    "display_order": 118,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-119",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Sauna infrarouge 35 min",
     "slug": "sauna-infrarouge-35-min",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Sauna infrarouge 35 min.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Sauna infrarouge 35 min.",
     "duration_minutes": 35,
     "price_cents": 3500,
@@ -2583,14 +2771,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 119
+    "display_order": 119,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-120",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Enveloppement cryo",
     "slug": "enveloppement-cryo",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Enveloppement cryo.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Enveloppement cryo.",
     "duration_minutes": 30,
     "price_cents": 3000,
@@ -2604,14 +2794,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 120
+    "display_order": 120,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-121",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Enveloppement algues",
     "slug": "enveloppement-algues",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Enveloppement algues.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Enveloppement algues.",
     "duration_minutes": 30,
     "price_cents": 3000,
@@ -2625,14 +2817,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 121
+    "display_order": 121,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-122",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Palper-rouler localisé",
     "slug": "palper-rouler-localise",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Palper-rouler localisé.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Palper-rouler localisé.",
     "duration_minutes": 30,
     "price_cents": 4000,
@@ -2646,14 +2840,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 122
+    "display_order": 122,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-123",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Palper-rouler corps",
     "slug": "palper-rouler-corps",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Palper-rouler corps.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Palper-rouler corps.",
     "duration_minutes": 45,
     "price_cents": 4500,
@@ -2667,14 +2863,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 123
+    "display_order": 123,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-124",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Drainage des jambes",
     "slug": "drainage-des-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Drainage des jambes.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Drainage des jambes.",
     "duration_minutes": 45,
     "price_cents": 4500,
@@ -2688,14 +2886,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 124
+    "display_order": 124,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-125",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Drainage corps",
     "slug": "drainage-corps",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Drainage corps.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Drainage corps.",
     "duration_minutes": 60,
     "price_cents": 8000,
@@ -2707,16 +2907,18 @@ const rawServices = [
     "deposit_cents": 0,
     "image_url": "https://www.estheticdiamonds.fr/ressources/images/Image-fx-1_3b15_lg.jpeg",
     "contraindications": null,
-    "is_featured": true,
+    "is_featured": false,
     "is_active": true,
-    "display_order": 125
+    "display_order": 125,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-126",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Soin du dos purifiant",
     "slug": "soin-du-dos-purifiant",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Soin du dos purifiant.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Soin du dos purifiant.",
     "duration_minutes": 60,
     "price_cents": 7000,
@@ -2730,14 +2932,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 126
+    "display_order": 126,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-127",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage femme enceinte jambes + dos",
     "slug": "massage-femme-enceinte-jambes-dos",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage femme enceinte jambes + dos.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage femme enceinte jambes + dos.",
     "duration_minutes": 30,
     "price_cents": 5500,
@@ -2751,14 +2955,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 127
+    "display_order": 127,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-128",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage femme enceinte relaxant complet jambes, dos et nuque",
     "slug": "massage-femme-enceinte-relaxant-complet-jambes-dos-et-nuque",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage femme enceinte relaxant complet jambes, dos et nuque.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage femme enceinte relaxant complet jambes, dos et nuque.",
     "duration_minutes": 45,
     "price_cents": 6500,
@@ -2772,14 +2978,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 128
+    "display_order": 128,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-129",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage maternité global visage, crâne, dos et jambes",
     "slug": "massage-maternite-global-visage-crane-dos-et-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage maternité global visage, crâne, dos et jambes.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage maternité global visage, crâne, dos et jambes.",
     "duration_minutes": 50,
     "price_cents": 7500,
@@ -2793,14 +3001,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 129
+    "display_order": 129,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-130",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage bébé — apaisement émotionnel sécurité",
     "slug": "massage-bebe-apaisement-emotionnel-securite",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — apaisement émotionnel sécurité.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — apaisement émotionnel sécurité.",
     "duration_minutes": 45,
     "price_cents": 4500,
@@ -2814,14 +3024,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 130
+    "display_order": 130,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-131",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage bébé — coordination calme & relâchement",
     "slug": "massage-bebe-coordination-calme-relachement",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — coordination calme & relâchement.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — coordination calme & relâchement.",
     "duration_minutes": 45,
     "price_cents": 4500,
@@ -2835,14 +3047,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 131
+    "display_order": 131,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-132",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage bébé — coordination détente musculaire ancrage",
     "slug": "massage-bebe-coordination-detente-musculaire-ancrage",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — coordination détente musculaire ancrage.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — coordination détente musculaire ancrage.",
     "duration_minutes": 50,
     "price_cents": 5000,
@@ -2856,14 +3070,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 132
+    "display_order": 132,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-133",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage bébé — soulagement coliques & digestion",
     "slug": "massage-bebe-soulagement-coliques-digestion",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — soulagement coliques & digestion.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — soulagement coliques & digestion.",
     "duration_minutes": 40,
     "price_cents": 4500,
@@ -2877,14 +3093,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 133
+    "display_order": 133,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-134",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage bébé — relaxation circulation",
     "slug": "massage-bebe-relaxation-circulation",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — relaxation circulation.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — relaxation circulation.",
     "duration_minutes": 50,
     "price_cents": 5000,
@@ -2898,14 +3116,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 134
+    "display_order": 134,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-135",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage bébé — endormissement sécurité équilibre nerveux",
     "slug": "massage-bebe-endormissement-securite-equilibre-nerveux",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — endormissement sécurité équilibre nerveux.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage bébé — endormissement sécurité équilibre nerveux.",
     "duration_minutes": 50,
     "price_cents": 5500,
@@ -2919,14 +3139,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 135
+    "display_order": 135,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-136",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage crânien",
     "slug": "massage-cranien",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage crânien.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage crânien.",
     "duration_minutes": 60,
     "price_cents": 5000,
@@ -2940,14 +3162,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 136
+    "display_order": 136,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-137",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage californien",
     "slug": "massage-californien",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage californien.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage californien.",
     "duration_minutes": 60,
     "price_cents": 6000,
@@ -2961,14 +3185,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": true,
     "is_active": true,
-    "display_order": 137
+    "display_order": 137,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-138",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage suédois",
     "slug": "massage-suedois",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage suédois.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage suédois.",
     "duration_minutes": 60,
     "price_cents": 7500,
@@ -2982,14 +3208,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 138
+    "display_order": 138,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-139",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage balinais",
     "slug": "massage-balinais",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage balinais.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage balinais.",
     "duration_minutes": 60,
     "price_cents": 9000,
@@ -3003,14 +3231,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 139
+    "display_order": 139,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-140",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage Lomi-Lomi",
     "slug": "massage-lomi-lomi",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage Lomi-Lomi.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage Lomi-Lomi.",
     "duration_minutes": 60,
     "price_cents": 9000,
@@ -3024,14 +3254,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 140
+    "display_order": 140,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-141",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage Oshiboris",
     "slug": "massage-oshiboris",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage Oshiboris.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage Oshiboris.",
     "duration_minutes": 60,
     "price_cents": 9000,
@@ -3045,14 +3277,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 141
+    "display_order": 141,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-142",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage digito-pression",
     "slug": "massage-digito-pression",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage digito-pression.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage digito-pression.",
     "duration_minutes": 60,
     "price_cents": 9000,
@@ -3066,14 +3300,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 142
+    "display_order": 142,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-143",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage de réflexologie",
     "slug": "massage-de-reflexologie",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage de réflexologie.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage de réflexologie.",
     "duration_minutes": 60,
     "price_cents": 9000,
@@ -3087,14 +3323,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 143
+    "display_order": 143,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-144",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Massage aux pierres chaudes",
     "slug": "massage-aux-pierres-chaudes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Massage aux pierres chaudes.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Massage aux pierres chaudes.",
     "duration_minutes": 60,
     "price_cents": 9500,
@@ -3106,16 +3344,18 @@ const rawServices = [
     "deposit_cents": 0,
     "image_url": "https://www.estheticdiamonds.fr/ressources/images/Image-fx-1_3b15_lg.jpeg",
     "contraindications": null,
-    "is_featured": true,
+    "is_featured": false,
     "is_active": true,
-    "display_order": 144
+    "display_order": 144,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-145",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Modelage dos",
     "slug": "modelage-dos",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Modelage dos.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Modelage dos.",
     "duration_minutes": 40,
     "price_cents": 3500,
@@ -3129,14 +3369,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 145
+    "display_order": 145,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-146",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Modelage dos + jambes",
     "slug": "modelage-dos-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Modelage dos + jambes.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Modelage dos + jambes.",
     "duration_minutes": 40,
     "price_cents": 4500,
@@ -3150,14 +3392,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 146
+    "display_order": 146,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-147",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Modelage tête, nuque et épaules",
     "slug": "modelage-tete-nuque-et-epaules",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Modelage tête, nuque et épaules.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Modelage tête, nuque et épaules.",
     "duration_minutes": 40,
     "price_cents": 4500,
@@ -3171,14 +3415,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 147
+    "display_order": 147,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-148",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Modelage pieds",
     "slug": "modelage-pieds",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Modelage pieds.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Modelage pieds.",
     "duration_minutes": 40,
     "price_cents": 4500,
@@ -3192,14 +3438,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 148
+    "display_order": 148,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-149",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Modelage récupération sportive",
     "slug": "modelage-recuperation-sportive",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Modelage récupération sportive.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Modelage récupération sportive.",
     "duration_minutes": 40,
     "price_cents": 6000,
@@ -3213,14 +3461,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 149
+    "display_order": 149,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-150",
-    "categorySlug": "massages",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Modelage 4 mains",
     "slug": "modelage-4-mains",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Modelage 4 mains.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Modelage 4 mains.",
     "duration_minutes": 40,
     "price_cents": 9700,
@@ -3234,14 +3484,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 150
+    "display_order": 150,
+    "originalCategorySlug": "massages",
+    "original_category_label": "Massages & modelages"
   },
   {
     "id": "demo-service-151",
-    "categorySlug": "soins-minceur",
+    "categorySlug": "sublimer-la-peau",
     "name": "Madérothérapie jambes",
     "slug": "maderotherapie-jambes",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Madérothérapie jambes.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Madérothérapie jambes.",
     "duration_minutes": 60,
     "price_cents": 6500,
@@ -3253,16 +3505,18 @@ const rawServices = [
     "deposit_cents": 0,
     "image_url": "https://www.estheticdiamonds.fr/ressources/images/Image-fx-1_3b15_lg.jpeg",
     "contraindications": null,
-    "is_featured": true,
+    "is_featured": false,
     "is_active": true,
-    "display_order": 151
+    "display_order": 151,
+    "originalCategorySlug": "soins-minceur",
+    "original_category_label": "Soins minceur"
   },
   {
     "id": "demo-service-152",
-    "categorySlug": "soins-minceur",
+    "categorySlug": "sublimer-la-peau",
     "name": "Madérothérapie ventre",
     "slug": "maderotherapie-ventre",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Madérothérapie ventre.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Madérothérapie ventre.",
     "duration_minutes": 45,
     "price_cents": 4000,
@@ -3276,14 +3530,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 152
+    "display_order": 152,
+    "originalCategorySlug": "soins-minceur",
+    "original_category_label": "Soins minceur"
   },
   {
     "id": "demo-service-153",
-    "categorySlug": "soins-minceur",
+    "categorySlug": "sublimer-la-peau",
     "name": "Madérothérapie bras",
     "slug": "maderotherapie-bras",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Madérothérapie bras.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Madérothérapie bras.",
     "duration_minutes": 45,
     "price_cents": 4000,
@@ -3297,14 +3553,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 153
+    "display_order": 153,
+    "originalCategorySlug": "soins-minceur",
+    "original_category_label": "Soins minceur"
   },
   {
     "id": "demo-service-154",
-    "categorySlug": "soins-minceur",
+    "categorySlug": "sublimer-la-peau",
     "name": "Madérothérapie localisée",
     "slug": "maderotherapie-localisee",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Madérothérapie localisée.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Madérothérapie localisée.",
     "duration_minutes": 45,
     "price_cents": 5000,
@@ -3318,14 +3576,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 154
+    "display_order": 154,
+    "originalCategorySlug": "soins-minceur",
+    "original_category_label": "Soins minceur"
   },
   {
     "id": "demo-service-155",
-    "categorySlug": "soins-minceur",
+    "categorySlug": "sublimer-la-peau",
     "name": "Forfait silhouette 12 soins",
     "slug": "forfait-silhouette-12-soins",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait silhouette 12 soins.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait silhouette 12 soins.",
     "duration_minutes": 60,
     "price_cents": 45000,
@@ -3339,14 +3599,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": true,
     "is_active": true,
-    "display_order": 155
+    "display_order": 155,
+    "originalCategorySlug": "soins-minceur",
+    "original_category_label": "Soins minceur"
   },
   {
     "id": "demo-service-156",
-    "categorySlug": "soins-minceur",
+    "categorySlug": "sublimer-la-peau",
     "name": "Forfait minceur 23 soins",
     "slug": "forfait-minceur-23-soins",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait minceur 23 soins.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait minceur 23 soins.",
     "duration_minutes": 60,
     "price_cents": 75000,
@@ -3360,14 +3622,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 156
+    "display_order": 156,
+    "originalCategorySlug": "soins-minceur",
+    "original_category_label": "Soins minceur"
   },
   {
     "id": "demo-service-157",
-    "categorySlug": "soins-minceur",
+    "categorySlug": "sublimer-la-peau",
     "name": "Forfait relax-détente 12 soins",
     "slug": "forfait-relax-detente-12-soins",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait relax-détente 12 soins.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait relax-détente 12 soins.",
     "duration_minutes": 60,
     "price_cents": 61000,
@@ -3381,14 +3645,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 157
+    "display_order": 157,
+    "originalCategorySlug": "soins-minceur",
+    "original_category_label": "Soins minceur"
   },
   {
     "id": "demo-service-158",
-    "categorySlug": "soins-minceur",
+    "categorySlug": "sublimer-la-peau",
     "name": "Forfait jambes légères 25 soins",
     "slug": "forfait-jambes-legeres-25-soins",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait jambes légères 25 soins.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait jambes légères 25 soins.",
     "duration_minutes": 45,
     "price_cents": 68000,
@@ -3402,14 +3668,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 158
+    "display_order": 158,
+    "originalCategorySlug": "soins-minceur",
+    "original_category_label": "Soins minceur"
   },
   {
     "id": "demo-service-159",
-    "categorySlug": "soins-minceur",
+    "categorySlug": "sublimer-la-peau",
     "name": "Forfait madérothérapie 10 soins",
     "slug": "forfait-maderotherapie-10-soins",
-    "short_description": "Prestation Esthetic Diamonds & Spa — Forfait madérothérapie 10 soins.",
+    "short_description": "Pour sublimer la peau : éclat, hydratation, fermeté, anti-âge ou peau nette.",
     "long_description": "Prestation Esthetic Diamonds & Spa — Forfait madérothérapie 10 soins.",
     "duration_minutes": 60,
     "price_cents": 65000,
@@ -3423,14 +3691,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 159
+    "display_order": 159,
+    "originalCategorySlug": "soins-minceur",
+    "original_category_label": "Soins minceur"
   },
   {
     "id": "demo-service-160",
-    "categorySlug": "aqua-sports",
+    "categorySlug": "bouger-en-douceur",
     "name": "Aquabike gym / aquagym séance d’essai",
     "slug": "aquabike-gym-aquagym-seance-d-essai",
-    "short_description": "Séance Aqua-sports Esthetic Diamonds & Spa.",
+    "short_description": "Pour bouger, se tonifier et prendre soin de son corps dans l’eau, sans impact brutal.",
     "long_description": "Séance Aqua-sports Esthetic Diamonds & Spa.",
     "duration_minutes": 45,
     "price_cents": 1500,
@@ -3444,14 +3714,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": true,
     "is_active": true,
-    "display_order": 160
+    "display_order": 160,
+    "originalCategorySlug": "aqua-sports",
+    "original_category_label": "Aqua-sports"
   },
   {
     "id": "demo-service-161",
-    "categorySlug": "aqua-sports",
+    "categorySlug": "bouger-en-douceur",
     "name": "Aquabike / aquagym 12 séances mensuelles",
     "slug": "aquabike-aquagym-12-seances-mensuelles",
-    "short_description": "Séance Aqua-sports Esthetic Diamonds & Spa.",
+    "short_description": "Pour bouger, se tonifier et prendre soin de son corps dans l’eau, sans impact brutal.",
     "long_description": "Séance Aqua-sports Esthetic Diamonds & Spa.",
     "duration_minutes": 45,
     "price_cents": 6000,
@@ -3463,16 +3735,18 @@ const rawServices = [
     "deposit_cents": 0,
     "image_url": "https://www.estheticdiamonds.fr/ressources/images/Image-fx-1_3b15_lg.jpeg",
     "contraindications": null,
-    "is_featured": true,
+    "is_featured": false,
     "is_active": true,
-    "display_order": 161
+    "display_order": 161,
+    "originalCategorySlug": "aqua-sports",
+    "original_category_label": "Aqua-sports"
   },
   {
     "id": "demo-service-162",
-    "categorySlug": "aqua-sports",
+    "categorySlug": "bouger-en-douceur",
     "name": "Éveil aquatique séance découverte",
     "slug": "eveil-aquatique-seance-decouverte",
-    "short_description": "Séance Aqua-sports Esthetic Diamonds & Spa.",
+    "short_description": "Pour bouger, se tonifier et prendre soin de son corps dans l’eau, sans impact brutal.",
     "long_description": "Séance Aqua-sports Esthetic Diamonds & Spa.",
     "duration_minutes": 45,
     "price_cents": 2500,
@@ -3486,14 +3760,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 162
+    "display_order": 162,
+    "originalCategorySlug": "aqua-sports",
+    "original_category_label": "Aqua-sports"
   },
   {
     "id": "demo-service-163",
-    "categorySlug": "aqua-sports",
+    "categorySlug": "bouger-en-douceur",
     "name": "Éveil aquatique 5 séances",
     "slug": "eveil-aquatique-5-seances",
-    "short_description": "Séance Aqua-sports Esthetic Diamonds & Spa.",
+    "short_description": "Pour bouger, se tonifier et prendre soin de son corps dans l’eau, sans impact brutal.",
     "long_description": "Séance Aqua-sports Esthetic Diamonds & Spa.",
     "duration_minutes": 45,
     "price_cents": 9500,
@@ -3507,14 +3783,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 163
+    "display_order": 163,
+    "originalCategorySlug": "aqua-sports",
+    "original_category_label": "Aqua-sports"
   },
   {
     "id": "demo-service-164",
-    "categorySlug": "aqua-sports",
+    "categorySlug": "bouger-en-douceur",
     "name": "Éveil aquatique 10 séances",
     "slug": "eveil-aquatique-10-seances",
-    "short_description": "Séance Aqua-sports Esthetic Diamonds & Spa.",
+    "short_description": "Pour bouger, se tonifier et prendre soin de son corps dans l’eau, sans impact brutal.",
     "long_description": "Séance Aqua-sports Esthetic Diamonds & Spa.",
     "duration_minutes": 45,
     "price_cents": 19000,
@@ -3528,14 +3806,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 164
+    "display_order": 164,
+    "originalCategorySlug": "aqua-sports",
+    "original_category_label": "Aqua-sports"
   },
   {
     "id": "demo-service-165",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Coffret initiation à la détente — soin flash + massage ou sauna + massage",
     "slug": "coffret-initiation-a-la-detente-soin-flash-massage-ou-sauna-massage",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 90,
     "price_cents": 7500,
@@ -3549,14 +3829,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 165
+    "display_order": 165,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-166",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Coffret d’escale bien-être — soin visage, gommage, massage, sauna",
     "slug": "coffret-d-escale-bien-etre-soin-visage-gommage-massage-sauna",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 120,
     "price_cents": 22000,
@@ -3570,14 +3852,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 166
+    "display_order": 166,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-167",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Escale beauté promotion",
     "slug": "escale-beaute-promotion",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 60,
     "price_cents": 5500,
@@ -3591,14 +3875,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 167
+    "display_order": 167,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-168",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Combo beauté des pieds + vernis",
     "slug": "combo-beaute-des-pieds-vernis",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 45,
     "price_cents": 3500,
@@ -3612,14 +3898,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 168
+    "display_order": 168,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-169",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Coffret initiation à la détente — gommage + massage californien",
     "slug": "coffret-initiation-a-la-detente-gommage-massage-californien",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 90,
     "price_cents": 7500,
@@ -3633,14 +3921,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": true,
     "is_active": true,
-    "display_order": 169
+    "display_order": 169,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-170",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Coffret d’escale bien-être 2h30 — voyage sensoriel + sauna + dégustation",
     "slug": "coffret-d-escale-bien-etre-2h30-voyage-sensoriel-sauna-degustation",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 150,
     "price_cents": 17900,
@@ -3652,16 +3942,18 @@ const rawServices = [
     "deposit_cents": 0,
     "image_url": "https://www.estheticdiamonds.fr/ressources/images/Image-fx-1_3b15_lg.jpeg",
     "contraindications": null,
-    "is_featured": true,
+    "is_featured": false,
     "is_active": true,
-    "display_order": 170
+    "display_order": 170,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-171",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Coffret bien-être — gommage + modelage relaxant",
     "slug": "coffret-bien-etre-gommage-modelage-relaxant",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 90,
     "price_cents": 7500,
@@ -3675,14 +3967,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 171
+    "display_order": 171,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-172",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Coffret bien-être — sauna, gommage, soin visage, modelage",
     "slug": "coffret-bien-etre-sauna-gommage-soin-visage-modelage",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 150,
     "price_cents": 24000,
@@ -3696,14 +3990,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 172
+    "display_order": 172,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-173",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Coffret rituel oriental — savon noir, eau de rose, rhassoul, modelage miel calisson",
     "slug": "coffret-rituel-oriental-savon-noir-eau-de-rose-rhassoul-modelage-miel-calisson",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 150,
     "price_cents": 25000,
@@ -3717,14 +4013,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 173
+    "display_order": 173,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-174",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Coffret évasion voyage 1h30 — formule initiale",
     "slug": "coffret-evasion-voyage-1h30-formule-initiale",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 90,
     "price_cents": 9000,
@@ -3738,14 +4036,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 174
+    "display_order": 174,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-175",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Escapade du Monde — gommage, enveloppement, massage californien",
     "slug": "escapade-du-monde-gommage-enveloppement-massage-californien",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 120,
     "price_cents": 18000,
@@ -3759,14 +4059,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 175
+    "display_order": 175,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-176",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Formule évasion — sauna, gommage, soin visage, massage californien",
     "slug": "formule-evasion-sauna-gommage-soin-visage-massage-californien",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 150,
     "price_cents": 24000,
@@ -3780,14 +4082,16 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 176
+    "display_order": 176,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   },
   {
     "id": "demo-service-177",
-    "categorySlug": "coffrets-bien-etre",
+    "categorySlug": "soffrir-une-vraie-pause",
     "name": "Formule évasion orientale — savon noir, rose, rhassoul, massage miel calisson",
     "slug": "formule-evasion-orientale-savon-noir-rose-rhassoul-massage-miel-calisson",
-    "short_description": "Coffret bien-être Esthetic Diamonds & Spa.",
+    "short_description": "Pour relâcher la pression, souffler et vivre une vraie parenthèse bien-être.",
     "long_description": "Coffret bien-être Esthetic Diamonds & Spa.",
     "duration_minutes": 150,
     "price_cents": 25000,
@@ -3801,7 +4105,9 @@ const rawServices = [
     "contraindications": null,
     "is_featured": false,
     "is_active": true,
-    "display_order": 177
+    "display_order": 177,
+    "originalCategorySlug": "coffrets-bien-etre",
+    "original_category_label": "Coffrets bien-être"
   }
 ];
 

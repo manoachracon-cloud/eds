@@ -1,0 +1,24 @@
+VERSION V3 — 4 UNIVERS MARKETING + LOGO CORRIGÉ
+
+Cette version corrige deux points :
+
+1. Logo
+Le logo n'est plus posé sur un bloc turquoise qui le rend peu lisible.
+Le bouton/logo de marque passe en fond blanc avec bordure subtile.
+
+2. Offres
+Les prestations sont restructurées selon la fiche action marketing :
+- Sublimer la peau
+- S’offrir une vraie pause
+- Se sentir nette et confiante
+- Bouger en douceur
+
+Ajouts visibles :
+- 4 cartes d’univers sur l’accueil
+- Catalogue filtré par les 4 univers
+- Section “Quel soin choisir ?”
+- Textes marketing alignés avec la fiche action
+- Les 177 prestations restent présentes, mais elles sont mieux hiérarchisées
+
+À faire :
+Uploader tout le contenu dans GitHub, commit, puis Vercel redéploie automatiquement.

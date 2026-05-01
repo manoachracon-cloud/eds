@@ -3735,7 +3735,7 @@ export default function AdminApp() {
                       prix_euros: Number(booking.price_cents || 0) / 100,
                       carte_cadeau_euros: Number(booking.gift_card_amount_cents || 0) / 100,
                       reste_a_payer_euros: Number(booking.payment_due_cents || 0) / 100
-                    }))}>
+                    })))}>
                       Exporter les réservations
                     </button>
                     <button className="btn btn-light" onClick={() => downloadCsv("paiements-esthetic-diamonds.csv", filteredPayments.map((payment) => ({
@@ -3747,7 +3747,7 @@ export default function AdminApp() {
                       statut: payment.status,
                       date_creation: payment.created_at,
                       date_paiement: payment.paid_at || ""
-                    }))}>
+                    })))}>
                       Exporter les paiements
                     </button>
                     <button className="btn btn-light" onClick={() => downloadCsv("cartes-cadeaux-esthetic-diamonds.csv", filteredGiftCards.map((card) => ({
@@ -3761,7 +3761,7 @@ export default function AdminApp() {
                       statut: card.status,
                       expiration: card.expires_at || "",
                       creation: card.created_at
-                    }))}>
+                    })))}>
                       Exporter les cartes cadeaux
                     </button>
                     <button className="btn btn-light" onClick={() => downloadCsv("clients-esthetic-diamonds.csv", clients.map((client) => ({
@@ -3771,7 +3771,7 @@ export default function AdminApp() {
                       telephone: client.phone,
                       date_creation: client.created_at,
                       nombre_rdv: bookings.filter((booking) => booking.clients?.id === client.id).length
-                    }))}>
+                    })))}>
                       Exporter les clients
                     </button>
                   </div>

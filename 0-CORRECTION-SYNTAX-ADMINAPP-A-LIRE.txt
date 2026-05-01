@@ -1,0 +1,29 @@
+CORRECTION SYNTAXE ADMINAPP
+
+Le build Vercel échouait dans :
+
+components/AdminApp.tsx
+
+Erreur :
+Expected '</', got '}'
+
+Cause :
+Dans les boutons d'export CSV, il manquait une parenthèse pour fermer l'appel à downloadCsv(...).
+
+Correction appliquée :
+}))}>
+devient :
+})))}>
+
+CE QUE TU DOIS FAIRE :
+
+1. Télécharge ce ZIP.
+2. Dézippe-le.
+3. Ouvre le dossier EDS-CORRECTION-SYNTAX-ADMINAPP.
+4. Sélectionne tout ce qu'il y a à l'intérieur.
+5. Upload dans GitHub en remplaçant les fichiers existants.
+6. Commit changes.
+7. Retourne dans Vercel.
+8. Redeploy.
+
+Tu ne touches pas aux variables Vercel.

@@ -203,6 +203,16 @@ export default function PublicBookingApp() {
   const [dianaRecommendation, setDianaRecommendation] = useState<DianaRecommendation | null>(null);
   const [dianaAiLoading, setDianaAiLoading] = useState(false);
 
+  function goTo(nextView: View) {
+    setView(nextView);
+
+    if (typeof window !== "undefined") {
+      window.setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 0);
+    }
+  }
+
   const selectedService = useMemo(
     () => services.find((service) => service.id === form.serviceId) || null,
     [services, form.serviceId]
@@ -459,17 +469,23 @@ export default function PublicBookingApp() {
       setDianaAiLoading(true);
 
       try {
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), 18000);
+
         const response = await fetch("/api/diana", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
+          signal: controller.signal,
           body: JSON.stringify({
             message: dianaNeed,
             clientAccount,
             mode: "service_recommendation"
           })
         });
+
+        window.clearTimeout(timeoutId);
 
         if (response.ok) {
           const data = await response.json();
@@ -489,7 +505,7 @@ export default function PublicBookingApp() {
           }
         }
       } catch {
-        // Si l’API OpenAI est indisponible, Diana repasse automatiquement en mode local.
+        // Si l’API OpenAI est indisponible ou trop lente, Diana repasse automatiquement en mode local.
       } finally {
         setDianaAiLoading(false);
       }
@@ -929,7 +945,7 @@ export default function PublicBookingApp() {
       <TopBar />
       <header className="header">
         <div className="container nav">
-          <button className="brand" onClick={() => goTo("home")}>
+          <button type="button" className="brand" onClick={() => goTo("home")}>
             <div className="brand-mark">
               <img src="/brand/logo-esthetic-diamonds-black-blue.png" alt="Esthetic Diamonds & Spa" />
             </div>
@@ -939,13 +955,13 @@ export default function PublicBookingApp() {
             </div>
           </button>
           <nav className="nav-links">
-            <button onClick={() => goTo("home")}>Accueil</button>
-            <button onClick={() => goTo("catalog")}>Nos soins</button>
-            <button onClick={() => goTo("booking")}>Réservation</button>
-            <button onClick={() => goTo("account")}>Mon compte</button>
+            <button type="button" onClick={() => goTo("home")}>Accueil</button>
+            <button type="button" onClick={() => goTo("catalog")}>Nos soins</button>
+            <button type="button" onClick={() => goTo("booking")}>Réservation</button>
+            <button type="button" onClick={() => goTo("account")}>Mon compte</button>
             <a href="/cartes-cadeaux">Cartes cadeaux</a>
           </nav>
-          <button className="btn btn-primary" onClick={() => goTo("booking")}>
+          <button type="button" className="btn btn-primary" onClick={() => goTo("booking")}>
             Prendre RDV
           </button>
         </div>
@@ -962,10 +978,10 @@ export default function PublicBookingApp() {
                   Soins visage, massages, épilation, coffrets cadeaux et aqua-sports dans un espace dédié à votre bien-être.
                 </p>
                 <div className="hero-actions">
-                  <button className="btn btn-primary" onClick={() => goTo("booking")}>
+                  <button type="button" className="btn btn-primary" onClick={() => goTo("booking")}>
                     Réserver un soin
                   </button>
-                  <button
+                  <button type="button"
                     className="btn btn-light"
                     onClick={() => {
                       setActiveCategory("soffrir-une-vraie-pause");
@@ -974,7 +990,7 @@ export default function PublicBookingApp() {
                   >
                     Découvrir les coffrets
                   </button>
-                  <button
+                  <button type="button"
                     className="btn btn-light"
                     onClick={() => {
                       setActiveCategory("bouger-en-douceur");
@@ -1015,22 +1031,22 @@ export default function PublicBookingApp() {
 
           <section className="quick-services">
             <div className="container quick-grid">
-              <button className="quick-card quick-button" onClick={() => { setActiveCategory("sublimer-la-peau"); goTo("catalog"); }}>
+              <button type="button" className="quick-card quick-button" onClick={() => { setActiveCategory("sublimer-la-peau"); goTo("catalog"); }}>
                 <div className="icon">✦</div>
                 <h3>Sublimer la peau</h3>
                 <p>Peau nette, lumineuse, ferme et fraîche.</p>
               </button>
-              <button className="quick-card quick-button" onClick={() => { setActiveCategory("soffrir-une-vraie-pause"); goTo("catalog"); }}>
+              <button type="button" className="quick-card quick-button" onClick={() => { setActiveCategory("soffrir-une-vraie-pause"); goTo("catalog"); }}>
                 <div className="icon">◇</div>
                 <h3>S’offrir une vraie pause</h3>
                 <p>Massages, gommages, rituels et coffrets.</p>
               </button>
-              <button className="quick-card quick-button" onClick={() => { setActiveCategory("se-sentir-nette-et-confiante"); goTo("catalog"); }}>
+              <button type="button" className="quick-card quick-button" onClick={() => { setActiveCategory("se-sentir-nette-et-confiante"); goTo("catalog"); }}>
                 <div className="icon">◆</div>
                 <h3>Se sentir nette et confiante</h3>
                 <p>Épilation, laser, regard, mains et pieds.</p>
               </button>
-              <button className="quick-card quick-button" onClick={() => { setActiveCategory("bouger-en-douceur"); goTo("catalog"); }}>
+              <button type="button" className="quick-card quick-button" onClick={() => { setActiveCategory("bouger-en-douceur"); goTo("catalog"); }}>
                 <div className="icon">≈</div>
                 <h3>Bouger en douceur</h3>
                 <p>Aquabike, aquagym et éveil aquatique.</p>
@@ -1045,7 +1061,7 @@ export default function PublicBookingApp() {
                 title="Les prestations à pousser en priorité."
                 description="Ces soins servent de portes d’entrée commerciales : diagnostic peau, massage, coffret, laser et aqua-sports."
                 action={
-                  <button className="btn btn-dark" onClick={() => goTo("catalog")}>
+                  <button type="button" className="btn btn-dark" onClick={() => goTo("catalog")}>
                     Voir tous les univers
                   </button>
                 }
@@ -1081,7 +1097,7 @@ export default function PublicBookingApp() {
                   <div className="diana-avatar">DR</div>
                   <h3>Diana Renoir</h3>
                   <p className="muted">
-                    Conseillère IA connectée à ChatGPT quand la clé OpenAI est configurée. Elle connaît la carte de soins,
+                    Conseillère IA connectée à GPT-5.5 avec raisonnement étendu quand la clé OpenAI est configurée. Elle connaît la carte de soins,
                     refuse les demandes inadaptées et propose une orientation personnalisée.
                   </p>
 
@@ -1099,7 +1115,7 @@ export default function PublicBookingApp() {
 
                   <div className="diana-chips">
                     {DIANA_EXAMPLES.map((example) => (
-                      <button
+                      <button type="button"
                         key={example}
                         className="chip"
                         onClick={() => {
@@ -1113,10 +1129,10 @@ export default function PublicBookingApp() {
                   </div>
 
                   <div className="actions">
-                    <button className="btn btn-primary" onClick={askDianaRenoir} disabled={dianaAiLoading}>
-                      {dianaAiLoading ? "Diana Renoir analyse..." : "Demander à Diana Renoir"}
+                    <button type="button" className="btn btn-primary" onClick={askDianaRenoir} disabled={dianaAiLoading}>
+                      {dianaAiLoading ? "Diana Renoir réfléchit avec GPT-5.5..." : "Demander à Diana Renoir"}
                     </button>
-                    <button
+                    <button type="button"
                       className="btn btn-light"
                       onClick={() => {
                         setDianaNeed("");
@@ -1157,7 +1173,7 @@ export default function PublicBookingApp() {
                               {service.duration_minutes} min · {(service.price_cents / 100).toLocaleString("fr-FR")} €
                             </p>
                           </div>
-                          <button className="btn btn-dark" onClick={() => startBooking(service.id)}>
+                          <button type="button" className="btn btn-dark" onClick={() => startBooking(service.id)}>
                             Réserver
                           </button>
                         </div>
@@ -1190,14 +1206,14 @@ export default function PublicBookingApp() {
             />
 
             <div className="filters">
-              <button
+              <button type="button"
                 className={`filter ${activeCategory === "all" ? "active" : ""}`}
                 onClick={() => setActiveCategory("all")}
               >
                 Tous
               </button>
               {categories.map((category) => (
-                <button
+                <button type="button"
                   key={category.id}
                   className={`filter ${activeCategory === category.slug ? "active" : ""}`}
                   onClick={() => setActiveCategory(category.slug)}
@@ -1215,7 +1231,7 @@ export default function PublicBookingApp() {
                 title="Aucune prestation ne correspond à votre recherche."
                 description="Essayez une autre catégorie ou retirez quelques mots-clés."
                 action={
-                  <button
+                  <button type="button"
                     className="btn btn-primary"
                     onClick={() => {
                       setSearch("");
@@ -1249,7 +1265,7 @@ export default function PublicBookingApp() {
               description="En mode démo, le compte est conservé sur cet appareil. En production, il sera relié à Supabase Auth pour retrouver l’historique, les réservations et les cartes cadeaux."
               action={
                 clientAccount ? (
-                  <button className="btn btn-light" onClick={disconnectClientAccount}>
+                  <button type="button" className="btn btn-light" onClick={disconnectClientAccount}>
                     Se déconnecter
                   </button>
                 ) : undefined
@@ -1312,10 +1328,10 @@ export default function PublicBookingApp() {
                 {accountMessage && <div className="alert" style={{ marginTop: 16 }}>{accountMessage}</div>}
 
                 <div className="actions">
-                  <button className="btn btn-primary" onClick={createClientAccount}>
+                  <button type="button" className="btn btn-primary" onClick={createClientAccount}>
                     {clientAccount ? "Mettre à jour mon compte" : "Créer mon compte"}
                   </button>
-                  <button className="btn btn-light" onClick={() => goTo("booking")}>
+                  <button type="button" className="btn btn-light" onClick={() => goTo("booking")}>
                     Réserver avec mon compte
                   </button>
                 </div>
@@ -1369,7 +1385,7 @@ export default function PublicBookingApp() {
                   {services.length > 0 && (
                     <div className="choice-grid">
                     {services.map((service) => (
-                      <button
+                      <button type="button"
                         key={service.id}
                         className={`choice ${form.serviceId === service.id ? "active" : ""}`}
                         onClick={() => {
@@ -1390,7 +1406,7 @@ export default function PublicBookingApp() {
                   )}
                   <div className="actions">
                     <span />
-                    <button
+                    <button type="button"
                       className="btn btn-primary"
                       disabled={!form.serviceId}
                       onClick={() => setStep(2)}
@@ -1422,7 +1438,7 @@ export default function PublicBookingApp() {
                         const isClosed = classItem.status === "closed";
 
                         return (
-                          <button
+                          <button type="button"
                             key={classItem.id}
                             className={`choice ${form.aquasportClassId === classItem.id ? "active" : ""}`}
                             onClick={() => {
@@ -1491,10 +1507,10 @@ export default function PublicBookingApp() {
                   )}
 
                   <div className="actions">
-                    <button className="btn btn-light" onClick={() => setStep(1)}>
+                    <button type="button" className="btn btn-light" onClick={() => setStep(1)}>
                       Retour
                     </button>
-                    <button
+                    <button type="button"
                       className="btn btn-primary"
                       disabled={isAquasportBooking && !form.aquasportClassId}
                       onClick={() => setStep(isAquasportBooking ? 4 : 3)}
@@ -1537,7 +1553,7 @@ export default function PublicBookingApp() {
                       ) : (
                         <div className="slot-grid">
                           {availableSlots.map((slot) => (
-                            <button
+                            <button type="button"
                               key={slot}
                               className={`slot ${form.time === slot ? "active" : ""}`}
                               onClick={() => updateField("time", slot)}
@@ -1550,10 +1566,10 @@ export default function PublicBookingApp() {
                     </div>
                   </div>
                   <div className="actions">
-                    <button className="btn btn-light" onClick={() => setStep(2)}>
+                    <button type="button" className="btn btn-light" onClick={() => setStep(2)}>
                       Retour
                     </button>
-                    <button
+                    <button type="button"
                       className="btn btn-primary"
                       disabled={!form.time}
                       onClick={() => setStep(4)}
@@ -1682,10 +1698,10 @@ export default function PublicBookingApp() {
                   {submitError && <div className="error">{submitError}</div>}
 
                   <div className="actions">
-                    <button className="btn btn-light" onClick={() => setStep(3)}>
+                    <button type="button" className="btn btn-light" onClick={() => setStep(3)}>
                       Retour
                     </button>
-                    <button className="btn btn-primary" disabled={submitting} onClick={submitBooking}>
+                    <button type="button" className="btn btn-primary" disabled={submitting} onClick={submitBooking}>
                       {submitting ? "Création..." : "Confirmer la réservation"}
                     </button>
                   </div>
@@ -1736,10 +1752,10 @@ export default function PublicBookingApp() {
                     </div>
                   )}
                   <div className="actions">
-                    <button className="btn btn-light" onClick={() => goTo("home")}>
+                    <button type="button" className="btn btn-light" onClick={() => goTo("home")}>
                       Retour accueil
                     </button>
-                    <button
+                    <button type="button"
                       className="btn btn-primary"
                       onClick={() => {
                         setForm(initialForm);
@@ -1825,7 +1841,7 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: () => void
           <span>{service.duration_minutes} min</span>
           <span className="price">{money(service.price_cents)}</span>
         </div>
-        <button className="btn btn-primary" style={{ width: "100%", marginTop: 20 }} onClick={onBook}>
+        <button type="button" className="btn btn-primary" style={{ width: "100%", marginTop: 20 }} onClick={onBook}>
           Réserver
         </button>
       </div>

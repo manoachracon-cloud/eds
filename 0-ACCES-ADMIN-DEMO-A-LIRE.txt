@@ -1,0 +1,18 @@
+ACCÈS ADMIN DÉMO
+
+Cette version ajoute un accès admin temporaire en mode démonstration.
+
+Identifiants à utiliser sur /admin :
+
+Email :
+admin@estheticdiamonds.fr
+
+Mot de passe :
+demo123
+
+Important :
+Cet accès fonctionne uniquement quand la variable Vercel est :
+NEXT_PUBLIC_DEMO_MODE=true
+
+Ce n'est pas un vrai compte production.
+Pour la vraie production, il faudra configurer Supabase Auth et créer un profil super_admin.

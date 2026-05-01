@@ -110,10 +110,34 @@ type DianaRecommendation = {
 const DIANA_EXAMPLES = [
   "J’ai la peau terne et je veux retrouver de l’éclat",
   "Je suis fatiguée, stressée, j’ai besoin de souffler",
-  "Je veux une peau plus nette, moins de poils et être tranquille plus longtemps",
-  "Je veux reprendre le sport en douceur sans impact",
-  "Je cherche un coffret cadeau bien-être pour ma mère",
-  "J’ai des rides, un manque de fermeté ou une peau fatiguée"
+  "Je ne sais pas quoi offrir à ma mère",
+  "Je veux une peau plus nette et moins de poils",
+  "Je veux reprendre une activité douce dans l’eau",
+  "J’ai des rides, un manque de fermeté ou une peau fatiguée",
+  "Je ne sais pas exactement ce que je veux",
+  "J’ai une demande bizarre, aide-moi à choisir"
+];
+
+const DIANA_PERSONAS = [
+  "Diana Renoir vous répond avec douceur et précision.",
+  "Diana Renoir analyse votre demande comme une conseillère spa.",
+  "Diana Renoir vous oriente sans forcer la vente.",
+  "Diana Renoir privilégie une recommandation claire et réaliste.",
+  "Diana Renoir transforme votre besoin en choix simple."
+];
+
+const DIANA_BOUNDARY_RESPONSES = [
+  "Je peux vous aider à choisir un soin esthétique, bien-être ou aqua-sport, mais je ne peux pas répondre à cette demande sous cette forme.",
+  "Votre demande sort du cadre d’un conseil spa. Je peux en revanche vous orienter vers une prestation détente, peau, épilation, coffret ou aqua-sport.",
+  "Je reste dans mon rôle de conseillère bien-être : je peux vous aider à choisir un soin adapté, mais pas traiter une demande inappropriée ou dangereuse.",
+  "Cette demande n’est pas adaptée à une plateforme de réservation. Reformulez votre besoin en parlant de peau, détente, épilation, silhouette, cadeau ou aqua-sport."
+];
+
+const DIANA_FOLLOW_UPS = [
+  "Si vous hésitez encore, commencez par la prestation la plus douce puis demandez conseil sur place.",
+  "Si votre besoin est très précis, une prise de contact avec l’équipe reste recommandée avant de réserver.",
+  "Je vous propose une orientation, mais l’équipe pourra confirmer le choix selon votre peau, votre état du moment et vos attentes.",
+  "Pour un premier rendez-vous, choisissez la prestation qui répond au besoin principal plutôt que de tout traiter en une seule fois."
 ];
 
 function money(cents: number) {
@@ -338,11 +362,25 @@ export default function PublicBookingApp() {
     return value
       .toLowerCase()
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^\w\s€'-]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function pickDianaLine(lines: string[], seed: string) {
+    if (!lines.length) return "";
+    const normalizedSeed = normalizeDianaText(seed);
+    const score = normalizedSeed.split("").reduce((total, char) => total + char.charCodeAt(0), 0);
+    return lines[score % lines.length];
+  }
+
+  function hasAny(value: string, patterns: RegExp[]) {
+    return patterns.some((pattern) => pattern.test(value));
   }
 
   function findDianaServices(keywords: string[], preferredCategorySlug?: string, limit = 3) {
-    const normalizedKeywords = keywords.map(normalizeDianaText);
+    const normalizedKeywords = keywords.map(normalizeDianaText).filter(Boolean);
 
     return services
       .map((service) => {
@@ -356,7 +394,7 @@ export default function PublicBookingApp() {
         );
 
         if (preferredCategorySlug && service.category?.slug === preferredCategorySlug) {
-          score += 2;
+          score += 3;
         }
 
         if (service.is_featured) {
@@ -371,133 +409,278 @@ export default function PublicBookingApp() {
       .map((item) => item.service);
   }
 
+  function buildDianaRecommendation({
+    title,
+    intro,
+    keywords,
+    category,
+    tips,
+    request,
+    limit = 3
+  }: {
+    title: string;
+    intro: string;
+    keywords: string[];
+    category?: string;
+    tips: string[];
+    request: string;
+    limit?: number;
+  }) {
+    const matches = findDianaServices(keywords, category, limit);
+    const opening = pickDianaLine(DIANA_PERSONAS, request);
+    const followUp = pickDianaLine(DIANA_FOLLOW_UPS, request + title);
+
+    return {
+      title,
+      intro: `${opening} ${intro}`,
+      serviceIds: matches.map((service) => service.id),
+      tips: [...tips, followUp]
+    };
+  }
+
   function askDianaRenoir() {
     const request = normalizeDianaText(dianaNeed);
 
-    if (!request.trim()) {
+    if (!request) {
       setDianaRecommendation({
         title: "Diana Renoir a besoin d’un peu plus de détails",
-        intro: "Décrivez votre besoin en quelques mots : peau, détente, épilation, sport, cadeau, fatigue, rides, jambes lourdes ou autre.",
+        intro: "Expliquez votre besoin en quelques mots. Par exemple : peau terne, stress, cadeau, épilation, aqua-sport, jambes lourdes, rides, détente ou regard.",
         serviceIds: [],
-        tips: ["Plus votre demande est précise, plus l’orientation sera utile."]
+        tips: [
+          "Une bonne orientation commence par un besoin clair.",
+          "Vous pouvez aussi cliquer sur un exemple pour tester Diana."
+        ]
       });
       return;
     }
 
-    let recommendation: DianaRecommendation;
+    const dangerousOrMedical = hasAny(request, [
+      /\b(mourir|suicide|me tuer|automutilation|sang|blessure grave|infection|brulure grave|allergie severe|urgence|douleur intense|malaise|medicament|ordonnance|diagnostic medical|cancer|grossesse a risque)\b/,
+      /\b(maladie|infection|mycose|eczema severe|psoriasis severe|plaie ouverte|fievre|varice douloureuse)\b/
+    ]);
 
-    if (/(peau|terne|eclat|lumineuse|fatiguee|hydrat|seche|sensible|ride|fermete|anti age|anti-age|tache|cicatrice|imperfection|bouton|grain)/.test(request)) {
+    if (dangerousOrMedical) {
+      setDianaRecommendation({
+        title: "Diana Renoir ne remplace pas un avis médical",
+        intro: "Votre demande semble toucher à une situation médicale, douloureuse ou urgente. Je ne vais pas vous orienter vers une prestation comme si c’était un simple besoin esthétique.",
+        serviceIds: [],
+        tips: [
+          "Contactez un professionnel de santé si vous avez une douleur, une plaie, une infection, une réaction importante ou un doute médical.",
+          "Après validation médicale, l’équipe pourra vous conseiller une prestation douce et adaptée.",
+          "Pour une demande bien-être non médicale, reformulez votre besoin : détente, peau sensible, jambes lourdes, fatigue ou cadeau."
+        ]
+      });
+      return;
+    }
+
+    const inappropriate = hasAny(request, [
+      /\b(sex|sexe|sexuel|nu|nue|nudes|escort|prostitution|massage erotique|erotique|happy ending|parties intimes|attouchement|drogue|cocaine|weed|thc|alcool fort)\b/,
+      /\b(insulte|nique|pute|salope|connasse|connard|fdp)\b/
+    ]);
+
+    if (inappropriate) {
+      setDianaRecommendation({
+        title: "Diana Renoir garde un cadre professionnel",
+        intro: pickDianaLine(DIANA_BOUNDARY_RESPONSES, request),
+        serviceIds: [],
+        tips: [
+          "Vous pouvez reformuler votre demande autour d’un besoin réel : détente, peau, épilation, coffret, silhouette ou aqua-sport.",
+          "Exemple acceptable : « je cherche un massage relaxant pour relâcher les tensions du dos ».",
+          "La plateforme est réservée aux prestations esthétiques, bien-être et aqua-sports."
+        ]
+      });
+      return;
+    }
+
+    const nonsense = request.length < 4 || hasAny(request, [
+      /^(azerty|qwerty|test|lol|mdr|blabla|???|xxx|123|rien|nimporte quoi)$/i,
+      /\b(dinosaure|dragon|alien|sorcellerie|teleportation|devenir invisible|lune|mars|robot tueur)\b/
+    ]);
+
+    if (nonsense) {
+      setDianaRecommendation({
+        title: "Diana Renoir a compris que la demande est floue",
+        intro: "Votre message ne correspond pas encore à un besoin de soin identifiable. Je peux quand même vous aider si vous partez d’une sensation ou d’un objectif.",
+        serviceIds: findDianaServices(["diagnostic", "soin", "massage", "coffret"], undefined, 3).map((service) => service.id),
+        tips: [
+          "Essayez : « je veux me détendre », « ma peau est terne », « je veux offrir un cadeau », « je veux faire de l’aqua-sport ».",
+          "Si vous ne savez vraiment pas quoi choisir, commencez par une prestation découverte ou un massage relaxant.",
+          "Diana ne devine pas la vie de la cliente : elle transforme une demande claire en recommandation."
+        ]
+      });
+      return;
+    }
+
+    const budgetMatch = request.match(/(\d{2,3})\s?€|budget\s?(\d{2,3})|moins de\s?(\d{2,3})/);
+    const budget = budgetMatch
+      ? Number(budgetMatch[1] || budgetMatch[2] || budgetMatch[3])
+      : null;
+
+    const wantsGift = hasAny(request, [/\b(cadeau|offrir|maman|mere|anniversaire|noel|saint valentin|fete des meres|coffret|carte cadeau|surprise)\b/]);
+    const wantsSkin = hasAny(request, [/\b(peau|terne|eclat|lumineuse|fatiguee|hydrat|seche|sensible|ride|fermete|anti age|anti-age|tache|cicatrice|imperfection|bouton|grain|pores|visage|collagene)\b/]);
+    const wantsRelax = hasAny(request, [/\b(stress|fatigue|souffler|pause|detente|relax|massage|tension|dos|nuque|corps|spa|sauna|gommage|enveloppement|lacher prise|pression)\b/]);
+    const wantsConfidence = hasAny(request, [/\b(poil|epilation|laser|cire|jambe|maillot|aisselle|sourcil|cil|cils|regard|main|pied|ongle|nette|confiance|propre|feminine|semi permanent)\b/]);
+    const wantsAqua = hasAny(request, [/\b(aqua|aquabike|aquagym|sport|bouger|tonifier|silhouette|articulation|eau|piscine|reprise|douceur|maitre nageur)\b/]);
+    const wantsMinceur = hasAny(request, [/\b(minceur|cellulite|ventre|jambes lourdes|drainage|silhouette|maderotherapie|raffermir|tonifier)\b/]);
+    const hesitant = hasAny(request, [/\b(je ne sais pas|jhesite|j hesite|quoi choisir|conseille|aide moi|perdue|pas sure|pas sur|besoin de conseil)\b/]);
+
+    if (wantsGift) {
+      const keywords = budget && budget <= 90
+        ? ["coffret", "pause douceur", "evasion", "75", "90"]
+        : ["coffret", "rituel", "evasion", "escapade", "prestige"];
+      setDianaRecommendation(buildDianaRecommendation({
+        title: "Diana Renoir recommande un coffret bien-être",
+        intro: budget
+          ? `Votre demande ressemble à un cadeau avec un budget autour de ${budget} €. Je privilégie donc une option claire, facile à offrir et compréhensible.`
+          : "Votre demande ressemble à une intention cadeau. Je privilégie une offre simple à comprendre, désirable et adaptée à une vraie parenthèse bien-être.",
+        keywords,
+        category: "soffrir-une-vraie-pause",
+        request,
+        tips: [
+          "Pour un cadeau, il faut surtout une promesse claire : détente, évasion ou rituel premium.",
+          "Un coffret est plus facile à vendre quand il précise le prix, le contenu, la durée et le bénéfice.",
+          "Si la personne est fatiguée ou stressée, choisissez plutôt détente. Si elle aime les expériences, choisissez plutôt rituel."
+        ]
+      }));
+      return;
+    }
+
+    if (wantsSkin) {
       let keywords = ["soin", "visage", "eclat", "hyaluronique", "silicium", "exception marine"];
+      let precision = "Je vous oriente vers un soin visage ciblé.";
 
-      if (/(grasse|bouton|imperfection|pores|acne)/.test(request)) {
+      if (hasAny(request, [/\b(grasse|bouton|imperfection|pores|acne|brillance)\b/])) {
         keywords = ["purete", "microneedling", "peeling", "visage"];
-      } else if (/(seche|sensible|tiraille|rougeur)/.test(request)) {
-        keywords = ["cold cream", "visage", "soin"];
-      } else if (/(ride|fermete|relachement|anti age|anti-age)/.test(request)) {
+        precision = "Votre demande évoque une peau grasse, des imperfections ou un besoin de peau plus nette.";
+      } else if (hasAny(request, [/\b(seche|sensible|tiraille|rougeur|deshydratee)\b/])) {
+        keywords = ["cold cream", "visage", "soin", "hydrat"];
+        precision = "Votre demande évoque une peau sèche, sensible ou inconfortable.";
+      } else if (hasAny(request, [/\b(ride|fermete|relachement|anti age|anti-age|collagene|raffermir)\b/])) {
         keywords = ["hyaluronique", "silicium", "exception marine", "anti-age"];
-      } else if (/(tache|eclat|terne|lumineuse)/.test(request)) {
+        precision = "Votre demande évoque la fermeté, les rides ou un objectif anti-âge.";
+      } else if (hasAny(request, [/\b(tache|eclat|terne|lumineuse|bonne mine)\b/])) {
         keywords = ["coup d’eclat", "lumiere", "peeling", "visage"];
-      } else if (/(cicatrice|imperfection|grain)/.test(request)) {
+        precision = "Votre demande évoque l’éclat, les taches ou une peau fatiguée.";
+      } else if (hasAny(request, [/\b(cicatrice|grain|texture)\b/])) {
         keywords = ["microneedling", "peeling", "purete"];
+        precision = "Votre demande évoque la texture de peau, les cicatrices ou le grain de peau.";
       }
 
-      const matches = findDianaServices(keywords, "sublimer-la-peau", 3);
-      recommendation = {
+      setDianaRecommendation(buildDianaRecommendation({
         title: "Diana Renoir recommande un soin visage ciblé",
-        intro: "Votre demande correspond à l’univers Sublimer la peau : éclat, hydratation, fermeté ou peau plus nette.",
-        serviceIds: matches.map((service) => service.id),
+        intro: `${precision} L’objectif est de choisir selon le besoin réel de la peau, pas seulement selon le nom du soin.`,
+        keywords,
+        category: "sublimer-la-peau",
+        request,
         tips: [
-          "Commencez par un soin adapté à votre besoin réel, pas seulement par le soin le plus connu.",
-          "Si vous hésitez entre éclat, anti-âge ou imperfections, le diagnostic peau reste la meilleure porte d’entrée."
+          "Si vous hésitez, commencez par un soin découverte ou un diagnostic peau.",
+          "Pour les résultats visibles, les protocoles de plusieurs soins sont souvent plus cohérents qu’une seule séance.",
+          "Diana évite les promesses médicales : l’objectif est d’orienter, pas de garantir un résultat."
         ]
-      };
-    } else if (/(stress|fatigue|souffler|pause|detente|relax|massage|tension|dos|nuque|corps|spa|sauna|gommage|coffret|cadeau|maman|mere|anniversaire)/.test(request)) {
-      const keywords = /(coffret|cadeau|maman|mere|anniversaire)/.test(request)
-        ? ["coffret", "pause douceur", "evasion", "rituel"]
-        : ["massage", "californien", "drainage", "gommage", "sauna"];
-      const matches = findDianaServices(keywords, "soffrir-une-vraie-pause", 3);
-      recommendation = {
-        title: "Diana Renoir recommande une vraie pause bien-être",
-        intro: "Votre demande correspond à l’univers S’offrir une vraie pause : relâcher la pression, souffler et se reconnecter à soi.",
-        serviceIds: matches.map((service) => service.id),
+      }));
+      return;
+    }
+
+    if (wantsAqua) {
+      setDianaRecommendation(buildDianaRecommendation({
+        title: "Diana Renoir recommande une séance Aqua-sports",
+        intro: "Votre demande correspond à un besoin de mouvement doux, de tonification ou de reprise progressive dans l’eau.",
+        keywords: ["aquabike", "aquagym", "eveil aquatique", "seance"],
+        category: "bouger-en-douceur",
+        request,
         tips: [
-          "Pour un cadeau, privilégiez un coffret avec promesse claire : détente, évasion ou rituel premium.",
-          "Pour un besoin personnel immédiat, un massage ou un rituel corps sera plus direct qu’une simple prestation courte."
+          "L’aqua-sport est adapté quand on veut bouger avec moins d’impact sur les articulations.",
+          "Pour progresser, la régularité est plus importante qu’une séance isolée.",
+          "Sur la réservation aqua-sport, Ludivine sera la référence côté maître-nageur."
         ]
-      };
-    } else if (/(poil|epilation|laser|cire|jambe|maillot|aisselle|sourcil|cil|cils|regard|main|pied|ongle|nette|confiance|propre)/.test(request)) {
-      const keywords = /(laser|durable|longtemps|poil)/.test(request)
+      }));
+      return;
+    }
+
+    if (wantsMinceur) {
+      setDianaRecommendation(buildDianaRecommendation({
+        title: "Diana Renoir recommande une orientation silhouette",
+        intro: "Votre demande parle de silhouette, jambes lourdes, drainage ou tonicité. Je vous oriente vers des soins corps cohérents avec cet objectif.",
+        keywords: ["maderotherapie", "drainage", "jambes", "palper-rouler", "silhouette", "minceur"],
+        category: wantsRelax ? "soffrir-une-vraie-pause" : undefined,
+        request,
+        tips: [
+          "Pour la silhouette, il vaut mieux penser en protocole plutôt qu’en séance unique.",
+          "Évitez les attentes irréalistes : les résultats dépendent de la régularité, de l’hygiène de vie et du profil.",
+          "Si vous avez une douleur ou un problème circulatoire important, demandez un avis médical avant de réserver."
+        ]
+      }));
+      return;
+    }
+
+    if (wantsConfidence) {
+      const keywords = hasAny(request, [/\b(laser|durable|longtemps|poil)\b/])
         ? ["laser", "aisselles", "maillot", "jambes"]
-        : /(cil|cils|regard|sourcil|microshading)/.test(request)
+        : hasAny(request, [/\b(cil|cils|regard|sourcil|microshading)\b/])
           ? ["microshading", "extension de cils", "sourcils"]
-          : /(main|pied|ongle|vernis|semi)/.test(request)
+          : hasAny(request, [/\b(main|pied|ongle|vernis|semi)\b/])
             ? ["beaute des mains", "beaute des pieds", "semi-permanent"]
             : ["cire", "epilation", "aisselles", "maillot"];
-      const matches = findDianaServices(keywords, "se-sentir-nette-et-confiante", 3);
-      recommendation = {
+
+      setDianaRecommendation(buildDianaRecommendation({
         title: "Diana Renoir recommande une prestation confiance",
         intro: "Votre demande correspond à l’univers Se sentir nette et confiante : épilation, laser, regard, mains ou pieds.",
-        serviceIds: matches.map((service) => service.id),
+        keywords,
+        category: "se-sentir-nette-et-confiante",
+        request,
         tips: [
-          "Pour le laser, restez sur une logique de protocole progressif et personnalisé.",
-          "Pour une prestation régulière, choisissez une solution facile à entretenir dans votre routine."
+          "Pour le laser, il faut raisonner en protocole progressif et personnalisé.",
+          "Pour l’épilation cire, choisissez d’abord la zone puis le niveau de finition attendu.",
+          "Pour le regard, microshading et cils répondent à deux besoins différents : sourcils structurés ou regard plus intense."
         ]
-      };
-    } else if (/(aqua|aquabike|aquagym|sport|bouger|tonifier|silhouette|articulation|eau|piscine|reprise|douceur)/.test(request)) {
-      const matches = findDianaServices(["aquabike", "aquagym", "eveil aquatique", "seance"], "bouger-en-douceur", 3);
-      recommendation = {
-        title: "Diana Renoir recommande l’aqua-sport",
-        intro: "Votre demande correspond à l’univers Bouger en douceur : se tonifier dans l’eau, avec moins d’impact sur les articulations.",
-        serviceIds: matches.map((service) => service.id),
-        tips: [
-          "L’aqua-sport est pertinent pour reprendre une activité sans brutaliser le corps.",
-          "Pour progresser, privilégiez une séance régulière plutôt qu’une séance isolée."
-        ]
-      };
-    } else {
-      const matches = findDianaServices(["diagnostic", "soin", "massage", "coffret"], undefined, 3);
-      recommendation = {
-        title: "Diana Renoir recommande une orientation personnalisée",
-        intro: "Votre demande mérite une orientation simple : commencer par un soin découverte, un massage ou un coffret selon votre objectif.",
-        serviceIds: matches.map((service) => service.id),
-        tips: [
-          "Quand le besoin n’est pas clair, il faut éviter de laisser la cliente seule face à toute la carte.",
-          "Le plus efficace est de partir du problème : peau, détente, confiance, silhouette ou cadeau."
-        ]
-      };
+      }));
+      return;
     }
 
-    setDianaRecommendation(recommendation);
-  }
-
-  useEffect(() => {
-    async function loadSlots() {
-      if (!form.serviceId || !form.date) return;
-
-      const { data, error } = await supabase.rpc("get_public_available_slots", {
-        p_service_id: form.serviceId,
-        p_employee_id: form.employeeId || null,
-        p_date: form.date
-      });
-
-      if (error) {
-        // La fonction RPC est fournie dans supabase/02_availability_rpc.sql.
-        // Si elle n'est pas encore installée, on garde les créneaux par défaut.
-        setAvailableSlots(defaultSlots);
-        return;
-      }
-
-      const slots = (data || []).map((row: any) => row.slot_time);
-      setAvailableSlots(slots.length > 0 ? slots : []);
+    if (wantsRelax) {
+      setDianaRecommendation(buildDianaRecommendation({
+        title: "Diana Renoir recommande une vraie pause bien-être",
+        intro: "Votre demande évoque de la fatigue, du stress, des tensions ou le besoin de ralentir. Je privilégie donc une prestation détente.",
+        keywords: ["massage", "californien", "drainage", "gommage", "sauna", "modelage"],
+        category: "soffrir-une-vraie-pause",
+        request,
+        tips: [
+          "Si vous êtes très tendue, un massage ciblé dos/nuque peut être plus pertinent qu’un soin trop général.",
+          "Si vous voulez une vraie expérience, choisissez plutôt un rituel avec gommage, massage ou sauna.",
+          "Un massage n’est pas seulement un luxe : c’est une pause structurée."
+        ]
+      }));
+      return;
     }
 
-    loadSlots();
-  }, [form.serviceId, form.employeeId, form.date]);
+    if (hesitant) {
+      setDianaRecommendation(buildDianaRecommendation({
+        title: "Diana Renoir propose une première orientation",
+        intro: "Vous hésitez, donc je vous propose des portes d’entrée simples plutôt qu’une liste trop longue.",
+        keywords: ["coup d’eclat", "massage californien", "coffret", "diagnostic"],
+        request,
+        tips: [
+          "Si vous voulez améliorer la peau : commencez par un soin visage.",
+          "Si vous voulez souffler : commencez par un massage.",
+          "Si c’est pour offrir : commencez par un coffret clair et facile à comprendre."
+        ]
+      }));
+      return;
+    }
 
-  function goTo(target: View) {
-    setView(target);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setDianaRecommendation(buildDianaRecommendation({
+      title: "Diana Renoir propose une orientation prudente",
+      intro: "Votre demande n’entre pas parfaitement dans une catégorie, donc je vous propose des options polyvalentes plutôt qu’une réponse forcée.",
+      keywords: ["soin", "massage", "coffret", "diagnostic"],
+      request,
+      tips: [
+        "Reformulez avec un objectif principal pour obtenir une recommandation plus précise.",
+        "Exemples : éclat de la peau, détente, cadeau, épilation durable, jambes légères ou reprise aqua-sport.",
+        "Diana ne propose pas de soin inadapté quand la demande est trop vague."
+      ]
+    }));
   }
+
 
   function startBooking(serviceId: string) {
     setForm({
@@ -849,7 +1032,7 @@ export default function PublicBookingApp() {
               <SectionHead
                 eyebrow="Diana Renoir · Conseillère IA"
                 title="Quel soin choisir ?"
-                description="Décrivez votre besoin, votre problème ou votre envie. Diana Renoir analyse la carte de soins Esthetic Diamonds & Spa et vous oriente vers les prestations les plus adaptées."
+                description="Décrivez votre besoin, votre problème ou votre envie. Diana Renoir analyse la carte de soins, comprend les demandes floues, refuse les demandes inappropriées et propose une orientation adaptée."
               />
 
               <div className="grid grid-2 diana-grid">
@@ -857,8 +1040,8 @@ export default function PublicBookingApp() {
                   <div className="diana-avatar">DR</div>
                   <h3>Diana Renoir</h3>
                   <p className="muted">
-                    Conseillère IA paramétrée avec la carte de soins : soins visage, massages,
-                    épilation, laser, coffrets, minceur et aqua-sports.
+                    Conseillère IA paramétrée avec la carte de soins. Elle sait orienter, refuser les demandes inadaptées,
+                    clarifier les demandes floues et proposer une réponse différente selon le besoin.
                   </p>
 
                   <label style={{ marginTop: 18, display: "block" }}>

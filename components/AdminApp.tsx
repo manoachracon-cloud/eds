@@ -49,6 +49,10 @@ type ServiceForm = {
   employee_ids: string[];
 };
 
+const ADMIN_DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
+const ADMIN_DEMO_EMAIL = "admin@estheticdiamonds.fr";
+const ADMIN_DEMO_PASSWORD = "demo123";
+
 const emptyServiceForm: ServiceForm = {
   name: "",
   slug: "",
@@ -409,6 +413,11 @@ export default function AdminApp() {
   const [dataError, setDataError] = useState("");
 
   useEffect(() => {
+    if (ADMIN_DEMO_MODE) {
+      setSessionReady(true);
+      return;
+    }
+
     async function init() {
       const { data } = await supabase.auth.getSession();
       setSession(data.session);
@@ -427,6 +436,18 @@ export default function AdminApp() {
   }, []);
 
   useEffect(() => {
+    if (ADMIN_DEMO_MODE && session) {
+      setCurrentProfile({
+        user_id: "demo-admin",
+        role: "super_admin",
+        first_name: "Admin",
+        last_name: "Démo",
+        is_active: true
+      });
+      setDataError("");
+      return;
+    }
+
     if (session) {
       loadCurrentProfile();
       loadAdminData();
@@ -486,6 +507,29 @@ export default function AdminApp() {
   async function signIn() {
     setAuthError("");
 
+    if (ADMIN_DEMO_MODE) {
+      if (email.trim().toLowerCase() === ADMIN_DEMO_EMAIL && password === ADMIN_DEMO_PASSWORD) {
+        setSession({
+          access_token: "demo-admin-token",
+          user: {
+            id: "demo-admin",
+            email: ADMIN_DEMO_EMAIL
+          }
+        });
+        setCurrentProfile({
+          user_id: "demo-admin",
+          role: "super_admin",
+          first_name: "Admin",
+          last_name: "Démo",
+          is_active: true
+        });
+        return;
+      }
+
+      setAuthError("Identifiants démo incorrects. Utilise admin@estheticdiamonds.fr / demo123.");
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password
@@ -511,7 +555,9 @@ export default function AdminApp() {
   }
 
   async function signOut() {
-    await supabase.auth.signOut();
+    if (!ADMIN_DEMO_MODE) {
+      await supabase.auth.signOut();
+    }
     setBookings([]);
     setServices([]);
     setClients([]);
@@ -1828,8 +1874,17 @@ export default function AdminApp() {
               Connexion équipe
             </h1>
             <p className="section-desc">
-              Connecte-toi avec un compte Supabase Auth ayant un profil interne dans
-              <strong> user_profiles</strong>.
+              {ADMIN_DEMO_MODE ? (
+                <>
+                  Mode démo activé. Utilise <strong>admin@estheticdiamonds.fr</strong> avec le mot de passe{" "}
+                  <strong>demo123</strong>.
+                </>
+              ) : (
+                <>
+                  Connecte-toi avec un compte Supabase Auth ayant un profil interne dans
+                  <strong> user_profiles</strong>.
+                </>
+              )}
             </p>
 
             <div style={{ display: "grid", gap: 16, marginTop: 24 }}>

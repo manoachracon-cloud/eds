@@ -1,0 +1,182 @@
+-- Esthetic Diamonds & Spa — Seed offres publiques V2
+-- Généré depuis les prestations publiques visibles sur estheticdiamonds.fr
+-- À utiliser plus tard dans Supabase si besoin.
+
+-- Prestations intégrées dans lib/demoData.ts :
+-- - [soins-visage] Soin fondamental flash coup d’éclat — 55.00 €
+-- - [soins-visage] Soin pureté peaux mixtes et grasses — 65.00 €
+-- - [soins-visage] Soin Cold Cream peaux sèches & sensibles — 65.00 €
+-- - [soins-visage] Soin Océan Men — 70.00 €
+-- - [soins-visage] Soin lumière éclaircissant — 70.00 €
+-- - [soins-visage] Soin peeling marin — 70.00 €
+-- - [soins-visage] Soin madérothérapie faciale cernes & poches — 65.00 €
+-- - [soins-visage] Soin spiruline boost — 75.00 €
+-- - [soins-visage] Soin hyaluronique pro-collagène — 85.00 €
+-- - [soins-visage] Soin silicium lift — 85.00 €
+-- - [soins-visage] Soin exception marine — 120.00 €
+-- - [soins-visage] Microneedling esthétique visage — 117.60 €
+-- - [soins-visage] Forfait 6 séances microneedling visage — 700.00 €
+-- - [soins-visage] Luminothérapie + diffusion de sérum — 50.00 €
+-- - [microshading-cils] Microshading — 250.00 €
+-- - [microshading-cils] Retouche microshading 1 à 6 mois — 80.00 €
+-- - [microshading-cils] Retouche annuelle microshading — 120.00 €
+-- - [microshading-cils] Teinture sourcils épilation + coloration — 25.00 €
+-- - [microshading-cils] Détatouage sourcils no laser — 1ère séance — 120.00 €
+-- - [microshading-cils] Détatouage sourcils no laser — 2ème séance — 70.00 €
+-- - [microshading-cils] Extension de cils pose complète cil à cil — 80.00 €
+-- - [microshading-cils] Extension de cils pose complète volume russe — 100.00 €
+-- - [microshading-cils] Extension de cils pose complète mixte — 90.00 €
+-- - [microshading-cils] Remplissage cils 2 semaines — cil à cil — 40.00 €
+-- - [microshading-cils] Remplissage cils 2 semaines — volume russe — 50.00 €
+-- - [microshading-cils] Remplissage cils 2 semaines — pose mixte — 35.00 €
+-- - [microshading-cils] Remplissage cils 3 semaines — cil à cil — 50.00 €
+-- - [microshading-cils] Remplissage cils 3 semaines — volume russe — 80.00 €
+-- - [microshading-cils] Remplissage cils 3 semaines — pose mixte — 70.00 €
+-- - [epilation-cire] Cire femme — entretien sourcils — 10.00 €
+-- - [epilation-cire] Cire femme — création ligne de sourcils — 12.00 €
+-- - [epilation-cire] Cire femme — création ligne sourcils à la pince — 17.00 €
+-- - [epilation-cire] Cire femme — visage — 25.00 €
+-- - [epilation-cire] Cire femme — lèvre supérieure — 10.00 €
+-- - [epilation-cire] Cire femme — nez — 15.00 €
+-- - [epilation-cire] Cire femme — menton — 12.00 €
+-- - [epilation-cire] Cire femme — orteils — 15.00 €
+-- - [epilation-cire] Cire femme — aisselles — 15.00 €
+-- - [epilation-cire] Cire femme — 1/2 jambes — 22.00 €
+-- - [epilation-cire] Cire femme — jambes entières — 30.00 €
+-- - [epilation-cire] Cire femme — maillot simple — 20.00 €
+-- - [epilation-cire] Cire femme — maillot brésilien — 25.00 €
+-- - [epilation-cire] Cire femme — maillot semi-intégral — 28.00 €
+-- - [epilation-cire] Cire femme — maillot intégral — 32.00 €
+-- - [epilation-cire] Cire femme — fesses — 15.00 €
+-- - [epilation-cire] Cire femme — sillon fessier — 12.00 €
+-- - [epilation-cire] Cire homme — sourcils — 15.00 €
+-- - [epilation-cire] Cire homme — oreilles — 20.00 €
+-- - [epilation-cire] Cire homme — aisselles — 25.00 €
+-- - [epilation-cire] Cire homme — barbe faible pilosité — 25.00 €
+-- - [epilation-cire] Cire homme — barbe forte pilosité — 40.00 €
+-- - [epilation-cire] Cire homme — nez — 20.00 €
+-- - [epilation-cire] Cire homme — orteils — 20.00 €
+-- - [epilation-cire] Cire homme — bras — 30.00 €
+-- - [epilation-cire] Cire homme — torse — 25.00 €
+-- - [epilation-cire] Cire homme — épaules — 20.00 €
+-- - [epilation-cire] Cire homme — dos — 30.00 €
+-- - [epilation-cire] Cire homme — cuisses — 35.00 €
+-- - [epilation-cire] Cire homme — 1/2 jambes — 30.00 €
+-- - [epilation-cire] Cire homme — jambes entières — 45.00 €
+-- - [epilation-laser] Laser femme visage — lèvres supérieures — 50.00 €
+-- - [epilation-laser] Laser femme visage — menton — 50.00 €
+-- - [epilation-laser] Laser femme visage — lèvres supérieures + menton — 80.00 €
+-- - [epilation-laser] Laser femme visage — joues — 80.00 €
+-- - [epilation-laser] Laser femme corps — aisselles — 80.00 €
+-- - [epilation-laser] Laser femme corps — maillot simple — 120.00 €
+-- - [epilation-laser] Laser femme corps — maillot intégral — 180.00 €
+-- - [epilation-laser] Laser femme corps — sillon interfessier — 60.00 €
+-- - [epilation-laser] Laser femme corps — 1/2 jambes — 100.00 €
+-- - [epilation-laser] Laser femme corps — jambes complètes — 180.00 €
+-- - [epilation-laser] Forfait laser femme — aisselles + maillot simple — 180.00 €
+-- - [epilation-laser] Forfait laser femme — aisselles + maillot simple + 1/2 jambes — 280.00 €
+-- - [epilation-laser] Forfait laser femme — aisselles + maillot simple + jambes entières — 360.00 €
+-- - [epilation-laser] Forfait laser femme — aisselles + maillot intégral — 240.00 €
+-- - [epilation-laser] Forfait laser femme — aisselles + maillot intégral + sillon interfessier — 300.00 €
+-- - [epilation-laser] Forfait laser femme — aisselles + 1/2 jambes — 160.00 €
+-- - [epilation-laser] Forfait laser femme — aisselles + jambes complètes — 240.00 €
+-- - [epilation-laser] Laser homme visage — moustache — 60.00 €
+-- - [epilation-laser] Laser homme visage — barbe — 75.00 €
+-- - [epilation-laser] Laser homme visage — pommettes — 80.00 €
+-- - [epilation-laser] Laser homme visage — nuque — 60.00 €
+-- - [epilation-laser] Laser homme visage — collier — 80.00 €
+-- - [epilation-laser] Laser homme corps — avant-bras — 90.00 €
+-- - [epilation-laser] Laser homme corps — bras — 180.00 €
+-- - [epilation-laser] Laser homme corps — torse — 180.00 €
+-- - [epilation-laser] Laser homme corps — abdomen — 150.00 €
+-- - [epilation-laser] Laser homme corps — épaules seules — 140.00 €
+-- - [epilation-laser] Laser homme corps — dos hors épaules — 180.00 €
+-- - [epilation-laser] Laser homme corps — 1/2 jambes — 250.00 €
+-- - [epilation-laser] Laser homme corps — jambes complètes — 350.00 €
+-- - [epilation-laser] Forfait laser homme — avant-bras + torse — 250.00 €
+-- - [epilation-laser] Forfait laser homme — avant-bras + abdomen — 220.00 €
+-- - [epilation-laser] Forfait laser homme — bras + torse — 340.00 €
+-- - [epilation-laser] Forfait laser homme — bras + abdomen — 310.00 €
+-- - [epilation-laser] Forfait laser homme — bras + torse + abdomen — 310.00 €
+-- - [epilation-laser] Forfait laser homme — torse + épaules + abdomen — 450.00 €
+-- - [epilation-laser] Forfait laser homme — torse + abdomen + dos — 495.00 €
+-- - [epilation-laser] Forfait laser homme — torse + abdomen + dos + épaules — 600.00 €
+-- - [epilation-laser] Forfait laser homme — bras + 1/2 jambes — 410.00 €
+-- - [epilation-laser] Forfait laser homme — torse + jambes complètes — 510.00 €
+-- - [epilation-laser] Forfait laser homme — torse + dos + jambes complètes — 690.00 €
+-- - [beaute-mains-pieds] Beauté des pieds simple — 35.00 €
+-- - [beaute-mains-pieds] Beauté des pieds premium — 45.00 €
+-- - [beaute-mains-pieds] Beauté des mains simple — 35.00 €
+-- - [beaute-mains-pieds] Beauté des mains premium — 45.00 €
+-- - [beaute-mains-pieds] French manucure — 30.00 €
+-- - [beaute-mains-pieds] Chablon acrylique pieds — 55.00 €
+-- - [beaute-mains-pieds] Pose de semi-permanent — 22.00 €
+-- - [beaute-mains-pieds] Dépose de semi-permanent — 22.00 €
+-- - [beaute-mains-pieds] Dépose de semi-permanent clientes fidèles — 15.00 €
+-- - [beaute-mains-pieds] Dépose de capsules + soins — 35.00 €
+-- - [gommages-corporels] Gommage corporel Myspa — 37.00 €
+-- - [gommages-corporels] Gommage corporel Thalgo — 35.00 €
+-- - [gommages-corporels] Gommage minceur — 40.00 €
+-- - [gommages-corporels] Gommage au savon noir + gant de Kessa — 40.00 €
+-- - [massages] Presso-esthétique jambes — 40.00 €
+-- - [massages] Presso-esthétique ventre — 30.00 €
+-- - [massages] Sauna infrarouge 20 min — 20.00 €
+-- - [massages] Sauna infrarouge 35 min — 35.00 €
+-- - [massages] Enveloppement cryo — 30.00 €
+-- - [massages] Enveloppement algues — 30.00 €
+-- - [massages] Palper-rouler localisé — 40.00 €
+-- - [massages] Palper-rouler corps — 45.00 €
+-- - [massages] Drainage des jambes — 45.00 €
+-- - [massages] Drainage corps — 80.00 €
+-- - [massages] Soin du dos purifiant — 70.00 €
+-- - [massages] Massage femme enceinte jambes + dos — 55.00 €
+-- - [massages] Massage femme enceinte relaxant complet jambes, dos et nuque — 65.00 €
+-- - [massages] Massage maternité global visage, crâne, dos et jambes — 75.00 €
+-- - [massages] Massage bébé — apaisement émotionnel sécurité — 45.00 €
+-- - [massages] Massage bébé — coordination calme & relâchement — 45.00 €
+-- - [massages] Massage bébé — coordination détente musculaire ancrage — 50.00 €
+-- - [massages] Massage bébé — soulagement coliques & digestion — 45.00 €
+-- - [massages] Massage bébé — relaxation circulation — 50.00 €
+-- - [massages] Massage bébé — endormissement sécurité équilibre nerveux — 55.00 €
+-- - [massages] Massage crânien — 50.00 €
+-- - [massages] Massage californien — 60.00 €
+-- - [massages] Massage suédois — 75.00 €
+-- - [massages] Massage balinais — 90.00 €
+-- - [massages] Massage Lomi-Lomi — 90.00 €
+-- - [massages] Massage Oshiboris — 90.00 €
+-- - [massages] Massage digito-pression — 90.00 €
+-- - [massages] Massage de réflexologie — 90.00 €
+-- - [massages] Massage aux pierres chaudes — 95.00 €
+-- - [massages] Modelage dos — 35.00 €
+-- - [massages] Modelage dos + jambes — 45.00 €
+-- - [massages] Modelage tête, nuque et épaules — 45.00 €
+-- - [massages] Modelage pieds — 45.00 €
+-- - [massages] Modelage récupération sportive — 60.00 €
+-- - [massages] Modelage 4 mains — 97.00 €
+-- - [soins-minceur] Madérothérapie jambes — 65.00 €
+-- - [soins-minceur] Madérothérapie ventre — 40.00 €
+-- - [soins-minceur] Madérothérapie bras — 40.00 €
+-- - [soins-minceur] Madérothérapie localisée — 50.00 €
+-- - [soins-minceur] Forfait silhouette 12 soins — 450.00 €
+-- - [soins-minceur] Forfait minceur 23 soins — 750.00 €
+-- - [soins-minceur] Forfait relax-détente 12 soins — 610.00 €
+-- - [soins-minceur] Forfait jambes légères 25 soins — 680.00 €
+-- - [soins-minceur] Forfait madérothérapie 10 soins — 650.00 €
+-- - [aqua-sports] Aquabike gym / aquagym séance d’essai — 15.00 €
+-- - [aqua-sports] Aquabike / aquagym 12 séances mensuelles — 60.00 €
+-- - [aqua-sports] Éveil aquatique séance découverte — 25.00 €
+-- - [aqua-sports] Éveil aquatique 5 séances — 95.00 €
+-- - [aqua-sports] Éveil aquatique 10 séances — 190.00 €
+-- - [coffrets-bien-etre] Coffret initiation à la détente — soin flash + massage ou sauna + massage — 75.00 €
+-- - [coffrets-bien-etre] Coffret d’escale bien-être — soin visage, gommage, massage, sauna — 220.00 €
+-- - [coffrets-bien-etre] Escale beauté promotion — 55.00 €
+-- - [coffrets-bien-etre] Combo beauté des pieds + vernis — 35.00 €
+-- - [coffrets-bien-etre] Coffret initiation à la détente — gommage + massage californien — 75.00 €
+-- - [coffrets-bien-etre] Coffret d’escale bien-être 2h30 — voyage sensoriel + sauna + dégustation — 179.00 €
+-- - [coffrets-bien-etre] Coffret bien-être — gommage + modelage relaxant — 75.00 €
+-- - [coffrets-bien-etre] Coffret bien-être — sauna, gommage, soin visage, modelage — 240.00 €
+-- - [coffrets-bien-etre] Coffret rituel oriental — savon noir, eau de rose, rhassoul, modelage miel calisson — 250.00 €
+-- - [coffrets-bien-etre] Coffret évasion voyage 1h30 — formule initiale — 90.00 €
+-- - [coffrets-bien-etre] Escapade du Monde — gommage, enveloppement, massage californien — 180.00 €
+-- - [coffrets-bien-etre] Formule évasion — sauna, gommage, soin visage, massage californien — 240.00 €
+-- - [coffrets-bien-etre] Formule évasion orientale — savon noir, rose, rhassoul, massage miel calisson — 250.00 €

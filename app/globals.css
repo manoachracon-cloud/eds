@@ -332,3 +332,5 @@ label span{display:block;font-size:13px;color:var(--ink);font-weight:900;margin-
   .empty-state h3{font-size:25px}
   .page-message h1{font-size:36px}
 }
+
+.brand-mark img{width:34px;height:34px;object-fit:contain;display:block}

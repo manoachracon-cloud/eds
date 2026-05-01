@@ -1,0 +1,31 @@
+VERSION V2 — OFFRES + COMPTE CLIENT + LOGO
+
+Cette version met l'accent sur le côté client.
+
+Ajouts :
+1. Catalogue complet aligné avec les offres visibles sur estheticdiamonds.fr
+2. Catégories :
+   - Soins du visage
+   - Microshading & cils
+   - Épilation cire
+   - Épilation laser diode
+   - Beauté mains & pieds
+   - Gommages corporels
+   - Massages & modelages
+   - Soins minceur
+   - Aqua-sports
+   - Coffrets bien-être
+3. Logo Esthetic Diamonds intégré dans public/brand
+4. Espace client démo :
+   - création de compte
+   - stockage local sur l'appareil
+   - préremplissage des réservations
+   - résumé client
+
+CE QUE TU DOIS FAIRE :
+- Upload tout le contenu dans GitHub en remplaçant les fichiers existants.
+- Commit changes.
+- Retourne sur Vercel.
+- Redeploy.
+
+Tu ne touches pas aux variables Vercel.

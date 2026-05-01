@@ -28,7 +28,7 @@ const defaultSlots = [
   "17:30"
 ];
 
-type View = "home" | "catalog" | "booking";
+type View = "home" | "catalog" | "booking" | "account";
 type AquasportClass = {
   id: string;
   service_id: string;
@@ -82,6 +82,22 @@ const initialForm: BookingForm = {
   health: "",
   giftCardCode: "",
   consent: false
+};
+
+type ClientAccount = {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  birthDate: string;
+};
+
+const initialAccountForm: ClientAccount = {
+  firstName: "",
+  lastName: "",
+  phone: "",
+  email: "",
+  birthDate: ""
 };
 
 function money(cents: number) {
@@ -140,6 +156,9 @@ export default function PublicBookingApp() {
   const [submitting, setSubmitting] = useState(false);
   const [createdBooking, setCreatedBooking] = useState<any | null>(null);
   const [submitError, setSubmitError] = useState("");
+  const [clientAccount, setClientAccount] = useState<ClientAccount | null>(null);
+  const [accountForm, setAccountForm] = useState<ClientAccount>(initialAccountForm);
+  const [accountMessage, setAccountMessage] = useState("");
 
   const selectedService = useMemo(
     () => services.find((service) => service.id === form.serviceId) || null,
@@ -238,6 +257,53 @@ export default function PublicBookingApp() {
 
     loadInitialData();
   }, []);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("eds_client_account");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved) as ClientAccount;
+        setClientAccount(parsed);
+        setAccountForm(parsed);
+        setForm((previous) => ({
+          ...previous,
+          firstName: parsed.firstName,
+          lastName: parsed.lastName,
+          phone: parsed.phone,
+          email: parsed.email
+        }));
+      } catch {
+        window.localStorage.removeItem("eds_client_account");
+      }
+    }
+  }, []);
+
+  function createClientAccount() {
+    setAccountMessage("");
+
+    if (!accountForm.firstName || !accountForm.lastName || !accountForm.phone || !accountForm.email) {
+      setAccountMessage("Merci de renseigner le prénom, le nom, le téléphone et l’e-mail.");
+      return;
+    }
+
+    window.localStorage.setItem("eds_client_account", JSON.stringify(accountForm));
+    setClientAccount(accountForm);
+    setForm((previous) => ({
+      ...previous,
+      firstName: accountForm.firstName,
+      lastName: accountForm.lastName,
+      phone: accountForm.phone,
+      email: accountForm.email
+    }));
+    setAccountMessage("Compte client créé. Tes réservations seront préremplies avec tes informations.");
+  }
+
+  function disconnectClientAccount() {
+    window.localStorage.removeItem("eds_client_account");
+    setClientAccount(null);
+    setAccountForm(initialAccountForm);
+    setAccountMessage("Compte client déconnecté sur cet appareil.");
+  }
 
   useEffect(() => {
     async function loadSlots() {
@@ -467,7 +533,9 @@ export default function PublicBookingApp() {
       <header className="header">
         <div className="container nav">
           <button className="brand" onClick={() => goTo("home")}>
-            <div className="brand-mark">◆</div>
+            <div className="brand-mark">
+              <img src="/brand/logo-esthetic-diamonds-black-blue.png" alt="Esthetic Diamonds & Spa" />
+            </div>
             <div>
               <div className="brand-name">Esthetic Diamonds</div>
               <div className="brand-sub">Beauté · Spa · Aqua-sports</div>
@@ -477,8 +545,8 @@ export default function PublicBookingApp() {
             <button onClick={() => goTo("home")}>Accueil</button>
             <button onClick={() => goTo("catalog")}>Nos soins</button>
             <button onClick={() => goTo("booking")}>Réservation</button>
+            <button onClick={() => goTo("account")}>Mon compte</button>
             <a href="/cartes-cadeaux">Cartes cadeaux</a>
-            <a href="/admin">Admin V1</a>
           </nav>
           <button className="btn btn-primary" onClick={() => goTo("booking")}>
             Prendre RDV
@@ -513,11 +581,11 @@ export default function PublicBookingApp() {
                 </div>
               </div>
               <div className="hero-card">
-                <span className="badge">Supabase V1</span>
-                <h2>Réservation connectée à la base de données</h2>
+                <span className="badge">Offres Esthetic Diamonds</span>
+                <h2>Catalogue aligné avec les prestations publiques</h2>
                 <p>
-                  Le catalogue, les clients et les réservations peuvent maintenant provenir de
-                  Supabase.
+                  Soins visage, microshading, cils, épilation, beauté mains et pieds,
+                  massages, minceur, Aqua-sports et coffrets bien-être.
                 </p>
                 <div className="hero-mini-grid">
                   <div className="hero-mini">
@@ -652,13 +720,113 @@ export default function PublicBookingApp() {
         </section>
       )}
 
+
+      {view === "account" && (
+        <section className="section">
+          <div className="container">
+            <SectionHead
+              eyebrow="Espace client"
+              title="Créez votre compte client."
+              description="En mode démo, le compte est conservé sur cet appareil. En production, il sera relié à Supabase Auth pour retrouver l’historique, les réservations et les cartes cadeaux."
+              action={
+                clientAccount ? (
+                  <button className="btn btn-light" onClick={disconnectClientAccount}>
+                    Se déconnecter
+                  </button>
+                ) : undefined
+              }
+            />
+
+            <div className="grid grid-2">
+              <div className="card card-pad">
+                <h2 style={{ fontSize: 32 }}>
+                  {clientAccount ? "Compte connecté" : "Créer mon compte"}
+                </h2>
+                <p className="muted" style={{ marginTop: 8 }}>
+                  Ces informations préremplissent automatiquement le tunnel de réservation.
+                </p>
+
+                <div className="form-grid" style={{ marginTop: 24 }}>
+                  <label>
+                    <span>Prénom</span>
+                    <input
+                      className="input"
+                      value={accountForm.firstName}
+                      onChange={(event) => setAccountForm((previous) => ({ ...previous, firstName: event.target.value }))}
+                    />
+                  </label>
+                  <label>
+                    <span>Nom</span>
+                    <input
+                      className="input"
+                      value={accountForm.lastName}
+                      onChange={(event) => setAccountForm((previous) => ({ ...previous, lastName: event.target.value }))}
+                    />
+                  </label>
+                  <label>
+                    <span>Téléphone</span>
+                    <input
+                      className="input"
+                      value={accountForm.phone}
+                      onChange={(event) => setAccountForm((previous) => ({ ...previous, phone: event.target.value }))}
+                    />
+                  </label>
+                  <label>
+                    <span>E-mail</span>
+                    <input
+                      className="input"
+                      value={accountForm.email}
+                      onChange={(event) => setAccountForm((previous) => ({ ...previous, email: event.target.value }))}
+                    />
+                  </label>
+                  <label>
+                    <span>Date de naissance, optionnel</span>
+                    <input
+                      className="input"
+                      type="date"
+                      value={accountForm.birthDate}
+                      onChange={(event) => setAccountForm((previous) => ({ ...previous, birthDate: event.target.value }))}
+                    />
+                  </label>
+                </div>
+
+                {accountMessage && <div className="alert" style={{ marginTop: 16 }}>{accountMessage}</div>}
+
+                <div className="actions">
+                  <button className="btn btn-primary" onClick={createClientAccount}>
+                    {clientAccount ? "Mettre à jour mon compte" : "Créer mon compte"}
+                  </button>
+                  <button className="btn btn-light" onClick={() => goTo("booking")}>
+                    Réserver avec mon compte
+                  </button>
+                </div>
+              </div>
+
+              <div className="card card-pad">
+                <h2 style={{ fontSize: 32 }}>Mon espace</h2>
+                <div className="summary-grid" style={{ marginTop: 18 }}>
+                  <Summary label="Statut" value={clientAccount ? "Compte client démo actif" : "Aucun compte connecté"} />
+                  <Summary label="E-mail" value={clientAccount?.email || "Non renseigné"} />
+                  <Summary label="Téléphone" value={clientAccount?.phone || "Non renseigné"} />
+                  <Summary label="Dernière réservation" value={createdBooking?.booking_reference || "Aucune réservation créée"} />
+                </div>
+                <div className="success-box" style={{ marginTop: 18 }}>
+                  Fonction production prévue : connexion client sécurisée, historique des rendez-vous,
+                  modification / annulation, cartes cadeaux, consentement RGPD et rappels.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {view === "booking" && (
         <section className="section">
           <div className="container">
             <div className="eyebrow">Prendre rendez-vous</div>
             <h1 className="page-title">Choisissez votre moment de bien-être.</h1>
             <p className="section-desc">
-              Tunnel V1 : prestation, date, créneau, informations et confirmation.
+              Réservez en moins de deux minutes. Si vous avez créé un compte client, vos informations sont automatiquement préremplies.
             </p>
 
             <div className="booking-steps">
@@ -880,6 +1048,15 @@ export default function PublicBookingApp() {
               {step === 4 && (
                 <>
                   <h2 style={{ fontSize: 34 }}>Vos informations</h2>
+                  {clientAccount ? (
+                    <div className="success-box" style={{ marginTop: 16 }}>
+                      Réservation liée au compte : {clientAccount.firstName} {clientAccount.lastName}.
+                    </div>
+                  ) : (
+                    <div className="alert" style={{ marginTop: 16 }}>
+                      Vous pouvez réserver sans compte, ou créer un compte pour retrouver vos informations plus rapidement.
+                    </div>
+                  )}
                   <div className="form-grid" style={{ marginTop: 24 }}>
                     <label>
                       <span>Prénom</span>
@@ -1031,8 +1208,8 @@ export default function PublicBookingApp() {
                     />
                   </div>
                   <div className="success-box">
-                    La réservation est enregistrée dans Supabase. L’e-mail client, la notification
-                    interne, Google Calendar, WhatsApp et le lien de gestion ont été traités selon la configuration.
+                    Réservation créée en mode démo. En production, elle sera enregistrée dans Supabase,
+                    reliée au compte client et synchronisée avec les notifications configurées.
                   </div>
                   {createdBooking?.management_token && (
                     <div className="alert">

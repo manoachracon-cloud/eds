@@ -1,6 +1,6 @@
 {
   "name": "esthetic-diamonds-reservation",
-  "version": "1.0.0",
+  "version": "1.0.1-vercel-build-fix",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,18 +9,18 @@
     "vercel-build": "next build"
   },
   "dependencies": {
-    "@supabase/supabase-js": "latest",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "stripe": "latest"
+    "@supabase/supabase-js": "2.49.8",
+    "next": "15.5.15",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "stripe": "17.7.0"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest",
-    "typescript": "latest"
+    "@types/node": "22.15.3",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2",
+    "eslint": "9.25.1",
+    "eslint-config-next": "15.5.15",
+    "typescript": "5.8.3"
   }
 }

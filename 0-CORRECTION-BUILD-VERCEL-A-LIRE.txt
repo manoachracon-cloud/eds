@@ -1,0 +1,27 @@
+CORRECTION BUILD VERCEL
+
+Le premier déploiement a installé Next.js en version latest.
+Actuellement, latest installe Next.js 16, alors que ce projet est stabilisé pour Next.js 15.
+
+Correction faite dans ce dossier :
+- package.json corrigé
+- versions fixes, plus de "latest"
+- Next.js fixé en 15.5.15
+- React fixé en 19.1.1
+- eslint-config-next fixé en 15.5.15
+- ajout de .npmrc
+
+CE QUE TU DOIS FAIRE SUR GITHUB :
+
+1. Ouvre ton dépôt GitHub eds.
+2. Clique sur Add file -> Upload files.
+3. Ouvre CE dossier corrigé.
+4. Sélectionne TOUT ce qu'il y a à l'intérieur.
+5. Glisse tout dans GitHub.
+6. GitHub va te proposer de remplacer les fichiers existants.
+7. Clique sur Commit changes.
+8. Retourne sur Vercel.
+9. Clique sur Redeploy.
+
+Tu ne touches pas aux variables Vercel.
+Elles sont déjà bonnes.

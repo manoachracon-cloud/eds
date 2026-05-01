@@ -4134,22 +4134,45 @@ export const demoServices: Service[] = rawServices.map((service) => ({
   category: categoryBySlug[service.categorySlug] || null
 }));
 
-const demoEmployee = {
-  id: "demo-employee-esthetic",
-  public_display_name: "Équipe Esthetic Diamonds",
-  role_title: "Esthétique & bien-être"
+const layanaBramble = {
+  id: "demo-employee-layana-bramble",
+  public_display_name: "Layana Bramble",
+  role_title: "Esthéticienne"
 };
 
-const demoCoach = {
-  id: "demo-employee-aqua",
-  public_display_name: "Coach Aqua-sports",
-  role_title: "Aqua-sports"
+const dianaRenoirEsthetician = {
+  id: "demo-employee-diana-renoir",
+  public_display_name: "Diana Renoir",
+  role_title: "Esthéticienne"
 };
 
-export const demoEmployeeServices: EmployeeServiceRow[] = demoServices.map((service) => ({
-  service_id: service.id,
-  employees: service.category?.slug === "aqua-sports" ? demoCoach : demoEmployee
-}));
+const ludivineCoach = {
+  id: "demo-employee-ludivine",
+  public_display_name: "Ludivine",
+  role_title: "Maître-nageur Aqua-sports"
+};
+
+export const demoEmployeeServices: EmployeeServiceRow[] = demoServices.flatMap((service) => {
+  if (service.category?.slug === "bouger-en-douceur") {
+    return [
+      {
+        service_id: service.id,
+        employees: ludivineCoach
+      }
+    ];
+  }
+
+  return [
+    {
+      service_id: service.id,
+      employees: layanaBramble
+    },
+    {
+      service_id: service.id,
+      employees: dianaRenoirEsthetician
+    }
+  ];
+});
 
 const aquabikeService = demoServices.find((service) => service.slug.includes("aquabike-gym"));
 const aquagymService = demoServices.find((service) => service.slug.includes("aquabike-aquagym-12"));
@@ -4168,7 +4191,7 @@ export const demoAquasportClasses = [
     waitlist_count: 0,
     status: "open",
     instructions: "Prévoir maillot, serviette et bouteille d’eau.",
-    employees: demoCoach,
+    employees: ludivineCoach,
     resources: { name: "Espace Aqua-sports" }
   },
   {
@@ -4183,7 +4206,7 @@ export const demoAquasportClasses = [
     waitlist_count: 1,
     status: "open",
     instructions: "Arriver 10 minutes avant la séance.",
-    employees: demoCoach,
+    employees: ludivineCoach,
     resources: { name: "Espace Aqua-sports" }
   },
   {
@@ -4198,7 +4221,7 @@ export const demoAquasportClasses = [
     waitlist_count: 0,
     status: "open",
     instructions: "Parent accompagnateur obligatoire.",
-    employees: demoCoach,
+    employees: ludivineCoach,
     resources: { name: "Espace Aqua-sports" }
   }
 ];

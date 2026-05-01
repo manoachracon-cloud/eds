@@ -100,6 +100,22 @@ const initialAccountForm: ClientAccount = {
   birthDate: ""
 };
 
+type DianaRecommendation = {
+  title: string;
+  intro: string;
+  serviceIds: string[];
+  tips: string[];
+};
+
+const DIANA_EXAMPLES = [
+  "J’ai la peau terne et je veux retrouver de l’éclat",
+  "Je suis fatiguée, stressée, j’ai besoin de souffler",
+  "Je veux une peau plus nette, moins de poils et être tranquille plus longtemps",
+  "Je veux reprendre le sport en douceur sans impact",
+  "Je cherche un coffret cadeau bien-être pour ma mère",
+  "J’ai des rides, un manque de fermeté ou une peau fatiguée"
+];
+
 function money(cents: number) {
   return new Intl.NumberFormat("fr-FR", {
     style: "currency",
@@ -159,6 +175,8 @@ export default function PublicBookingApp() {
   const [clientAccount, setClientAccount] = useState<ClientAccount | null>(null);
   const [accountForm, setAccountForm] = useState<ClientAccount>(initialAccountForm);
   const [accountMessage, setAccountMessage] = useState("");
+  const [dianaNeed, setDianaNeed] = useState("");
+  const [dianaRecommendation, setDianaRecommendation] = useState<DianaRecommendation | null>(null);
 
   const selectedService = useMemo(
     () => services.find((service) => service.id === form.serviceId) || null,
@@ -170,6 +188,10 @@ export default function PublicBookingApp() {
       .filter((row) => row.service_id === form.serviceId && row.employees)
       .map((row) => row.employees as EmployeeOption);
   }, [employeeServices, form.serviceId]);
+
+  const selectedEmployee = useMemo(() => {
+    return employeesForService.find((employee) => employee.id === form.employeeId) || employeesForService[0] || null;
+  }, [employeesForService, form.employeeId]);
 
   const selectedAquasportClasses = useMemo(() => {
     return aquasportClasses
@@ -198,6 +220,13 @@ export default function PublicBookingApp() {
       return matchesCategory && matchesSearch;
     });
   }, [services, activeCategory, search]);
+
+  const dianaServices = useMemo(() => {
+    if (!dianaRecommendation) return [];
+    return dianaRecommendation.serviceIds
+      .map((serviceId) => services.find((service) => service.id === serviceId))
+      .filter(Boolean) as Service[];
+  }, [dianaRecommendation, services]);
 
   useEffect(() => {
     async function loadInitialData() {
@@ -305,6 +334,142 @@ export default function PublicBookingApp() {
     setAccountMessage("Compte client déconnecté sur cet appareil.");
   }
 
+  function normalizeDianaText(value: string) {
+    return value
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function findDianaServices(keywords: string[], preferredCategorySlug?: string, limit = 3) {
+    const normalizedKeywords = keywords.map(normalizeDianaText);
+
+    return services
+      .map((service) => {
+        const haystack = normalizeDianaText(
+          `${service.name} ${service.short_description || ""} ${service.long_description || ""} ${service.category?.name || ""}`
+        );
+
+        let score = normalizedKeywords.reduce(
+          (total, keyword) => total + (haystack.includes(keyword) ? 3 : 0),
+          0
+        );
+
+        if (preferredCategorySlug && service.category?.slug === preferredCategorySlug) {
+          score += 2;
+        }
+
+        if (service.is_featured) {
+          score += 1;
+        }
+
+        return { service, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score || (a.service.display_order || 0) - (b.service.display_order || 0))
+      .slice(0, limit)
+      .map((item) => item.service);
+  }
+
+  function askDianaRenoir() {
+    const request = normalizeDianaText(dianaNeed);
+
+    if (!request.trim()) {
+      setDianaRecommendation({
+        title: "Diana Renoir a besoin d’un peu plus de détails",
+        intro: "Décrivez votre besoin en quelques mots : peau, détente, épilation, sport, cadeau, fatigue, rides, jambes lourdes ou autre.",
+        serviceIds: [],
+        tips: ["Plus votre demande est précise, plus l’orientation sera utile."]
+      });
+      return;
+    }
+
+    let recommendation: DianaRecommendation;
+
+    if (/(peau|terne|eclat|lumineuse|fatiguee|hydrat|seche|sensible|ride|fermete|anti age|anti-age|tache|cicatrice|imperfection|bouton|grain)/.test(request)) {
+      let keywords = ["soin", "visage", "eclat", "hyaluronique", "silicium", "exception marine"];
+
+      if (/(grasse|bouton|imperfection|pores|acne)/.test(request)) {
+        keywords = ["purete", "microneedling", "peeling", "visage"];
+      } else if (/(seche|sensible|tiraille|rougeur)/.test(request)) {
+        keywords = ["cold cream", "visage", "soin"];
+      } else if (/(ride|fermete|relachement|anti age|anti-age)/.test(request)) {
+        keywords = ["hyaluronique", "silicium", "exception marine", "anti-age"];
+      } else if (/(tache|eclat|terne|lumineuse)/.test(request)) {
+        keywords = ["coup d’eclat", "lumiere", "peeling", "visage"];
+      } else if (/(cicatrice|imperfection|grain)/.test(request)) {
+        keywords = ["microneedling", "peeling", "purete"];
+      }
+
+      const matches = findDianaServices(keywords, "sublimer-la-peau", 3);
+      recommendation = {
+        title: "Diana Renoir recommande un soin visage ciblé",
+        intro: "Votre demande correspond à l’univers Sublimer la peau : éclat, hydratation, fermeté ou peau plus nette.",
+        serviceIds: matches.map((service) => service.id),
+        tips: [
+          "Commencez par un soin adapté à votre besoin réel, pas seulement par le soin le plus connu.",
+          "Si vous hésitez entre éclat, anti-âge ou imperfections, le diagnostic peau reste la meilleure porte d’entrée."
+        ]
+      };
+    } else if (/(stress|fatigue|souffler|pause|detente|relax|massage|tension|dos|nuque|corps|spa|sauna|gommage|coffret|cadeau|maman|mere|anniversaire)/.test(request)) {
+      const keywords = /(coffret|cadeau|maman|mere|anniversaire)/.test(request)
+        ? ["coffret", "pause douceur", "evasion", "rituel"]
+        : ["massage", "californien", "drainage", "gommage", "sauna"];
+      const matches = findDianaServices(keywords, "soffrir-une-vraie-pause", 3);
+      recommendation = {
+        title: "Diana Renoir recommande une vraie pause bien-être",
+        intro: "Votre demande correspond à l’univers S’offrir une vraie pause : relâcher la pression, souffler et se reconnecter à soi.",
+        serviceIds: matches.map((service) => service.id),
+        tips: [
+          "Pour un cadeau, privilégiez un coffret avec promesse claire : détente, évasion ou rituel premium.",
+          "Pour un besoin personnel immédiat, un massage ou un rituel corps sera plus direct qu’une simple prestation courte."
+        ]
+      };
+    } else if (/(poil|epilation|laser|cire|jambe|maillot|aisselle|sourcil|cil|cils|regard|main|pied|ongle|nette|confiance|propre)/.test(request)) {
+      const keywords = /(laser|durable|longtemps|poil)/.test(request)
+        ? ["laser", "aisselles", "maillot", "jambes"]
+        : /(cil|cils|regard|sourcil|microshading)/.test(request)
+          ? ["microshading", "extension de cils", "sourcils"]
+          : /(main|pied|ongle|vernis|semi)/.test(request)
+            ? ["beaute des mains", "beaute des pieds", "semi-permanent"]
+            : ["cire", "epilation", "aisselles", "maillot"];
+      const matches = findDianaServices(keywords, "se-sentir-nette-et-confiante", 3);
+      recommendation = {
+        title: "Diana Renoir recommande une prestation confiance",
+        intro: "Votre demande correspond à l’univers Se sentir nette et confiante : épilation, laser, regard, mains ou pieds.",
+        serviceIds: matches.map((service) => service.id),
+        tips: [
+          "Pour le laser, restez sur une logique de protocole progressif et personnalisé.",
+          "Pour une prestation régulière, choisissez une solution facile à entretenir dans votre routine."
+        ]
+      };
+    } else if (/(aqua|aquabike|aquagym|sport|bouger|tonifier|silhouette|articulation|eau|piscine|reprise|douceur)/.test(request)) {
+      const matches = findDianaServices(["aquabike", "aquagym", "eveil aquatique", "seance"], "bouger-en-douceur", 3);
+      recommendation = {
+        title: "Diana Renoir recommande l’aqua-sport",
+        intro: "Votre demande correspond à l’univers Bouger en douceur : se tonifier dans l’eau, avec moins d’impact sur les articulations.",
+        serviceIds: matches.map((service) => service.id),
+        tips: [
+          "L’aqua-sport est pertinent pour reprendre une activité sans brutaliser le corps.",
+          "Pour progresser, privilégiez une séance régulière plutôt qu’une séance isolée."
+        ]
+      };
+    } else {
+      const matches = findDianaServices(["diagnostic", "soin", "massage", "coffret"], undefined, 3);
+      recommendation = {
+        title: "Diana Renoir recommande une orientation personnalisée",
+        intro: "Votre demande mérite une orientation simple : commencer par un soin découverte, un massage ou un coffret selon votre objectif.",
+        serviceIds: matches.map((service) => service.id),
+        tips: [
+          "Quand le besoin n’est pas clair, il faut éviter de laisser la cliente seule face à toute la carte.",
+          "Le plus efficace est de partir du problème : peau, détente, confiance, silhouette ou cadeau."
+        ]
+      };
+    }
+
+    setDianaRecommendation(recommendation);
+  }
+
   useEffect(() => {
     async function loadSlots() {
       if (!form.serviceId || !form.date) return;
@@ -335,7 +500,15 @@ export default function PublicBookingApp() {
   }
 
   function startBooking(serviceId: string) {
-    setForm({ ...initialForm, serviceId, aquasportClassId: "" });
+    setForm({
+      ...initialForm,
+      serviceId,
+      aquasportClassId: "",
+      firstName: clientAccount?.firstName || "",
+      lastName: clientAccount?.lastName || "",
+      phone: clientAccount?.phone || "",
+      email: clientAccount?.email || ""
+    });
     setCreatedBooking(null);
     setSubmitError("");
     setStep(2);
@@ -357,7 +530,7 @@ export default function PublicBookingApp() {
         id: "demo-booking",
         booking_reference: "EDS-DEMO-001",
         service: selectedService,
-        employee: employeesForService[0] || null,
+        employee: selectedEmployee,
         selectedTime: isAquasportBooking && selectedAquasportClass ? formatTime(selectedAquasportClass.start_at) : form.time,
         selectedDate: isAquasportBooking && selectedAquasportClass ? selectedAquasportClass.start_at.slice(0, 10) : form.date,
         price_cents: selectedService?.price_cents || 0,
@@ -674,14 +847,100 @@ export default function PublicBookingApp() {
           <section className="section soft-section">
             <div className="container">
               <SectionHead
-                eyebrow="Quel soin choisir ?"
-                title="Une orientation simple pour les clientes qui hésitent."
-                description="Cette section transforme le catalogue en aide à la décision, au lieu de laisser la cliente face à trop de prestations."
+                eyebrow="Diana Renoir · Conseillère IA"
+                title="Quel soin choisir ?"
+                description="Décrivez votre besoin, votre problème ou votre envie. Diana Renoir analyse la carte de soins Esthetic Diamonds & Spa et vous oriente vers les prestations les plus adaptées."
               />
-              <div className="grid grid-3">
-                <div className="card card-pad"><h3>Peau terne</h3><p>Soin coup d’éclat — 55 €</p><button className="btn btn-light" onClick={() => { setSearch("coup d’éclat"); goTo("catalog"); }}>Voir le soin</button></div>
-                <div className="card card-pad"><h3>Rides / fermeté</h3><p>Hyaluronique, Silicium Lift ou Exception Marine.</p><button className="btn btn-light" onClick={() => { setSearch("hyaluronique"); goTo("catalog"); }}>Voir les soins anti-âge</button></div>
-                <div className="card card-pad"><h3>Besoin de souffler</h3><p>Massage californien, rituels corps ou coffrets.</p><button className="btn btn-light" onClick={() => { setActiveCategory("soffrir-une-vraie-pause"); goTo("catalog"); }}>Voir les pauses bien-être</button></div>
+
+              <div className="grid grid-2 diana-grid">
+                <div className="card card-pad diana-card">
+                  <div className="diana-avatar">DR</div>
+                  <h3>Diana Renoir</h3>
+                  <p className="muted">
+                    Conseillère IA paramétrée avec la carte de soins : soins visage, massages,
+                    épilation, laser, coffrets, minceur et aqua-sports.
+                  </p>
+
+                  <label style={{ marginTop: 18, display: "block" }}>
+                    <span>Expliquez votre besoin</span>
+                    <textarea
+                      className="input"
+                      rows={5}
+                      placeholder="Exemple : j’ai la peau terne, je veux retrouver de l’éclat avant un événement."
+                      value={dianaNeed}
+                      onChange={(event) => setDianaNeed(event.target.value)}
+                      style={{ resize: "vertical", minHeight: 130 }}
+                    />
+                  </label>
+
+                  <div className="diana-chips">
+                    {DIANA_EXAMPLES.map((example) => (
+                      <button
+                        key={example}
+                        className="chip"
+                        onClick={() => {
+                          setDianaNeed(example);
+                          setDianaRecommendation(null);
+                        }}
+                      >
+                        {example}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="actions">
+                    <button className="btn btn-primary" onClick={askDianaRenoir}>
+                      Demander à Diana Renoir
+                    </button>
+                    <button
+                      className="btn btn-light"
+                      onClick={() => {
+                        setDianaNeed("");
+                        setDianaRecommendation(null);
+                      }}
+                    >
+                      Réinitialiser
+                    </button>
+                  </div>
+                </div>
+
+                <div className="card card-pad">
+                  <span className="badge">Orientation personnalisée</span>
+                  <h3 style={{ marginTop: 12 }}>
+                    {dianaRecommendation ? dianaRecommendation.title : "Diana attend votre demande"}
+                  </h3>
+                  <p className="muted" style={{ marginTop: 8 }}>
+                    {dianaRecommendation
+                      ? dianaRecommendation.intro
+                      : "Écrivez ce que vous voulez améliorer : peau, détente, pilosité, confiance, silhouette, cadeau ou reprise d’activité."}
+                  </p>
+
+                  {dianaRecommendation && dianaRecommendation.tips.length > 0 && (
+                    <div className="success-box" style={{ marginTop: 16 }}>
+                      {dianaRecommendation.tips.map((tip) => (
+                        <p key={tip} style={{ margin: "6px 0" }}>• {tip}</p>
+                      ))}
+                    </div>
+                  )}
+
+                  {dianaServices.length > 0 && (
+                    <div style={{ display: "grid", gap: 12, marginTop: 18 }}>
+                      {dianaServices.map((service) => (
+                        <div key={service.id} className="recommendation-row">
+                          <div>
+                            <strong>{service.name}</strong>
+                            <p className="muted">
+                              {service.duration_minutes} min · {(service.price_cents / 100).toLocaleString("fr-FR")} €
+                            </p>
+                          </div>
+                          <button className="btn btn-dark" onClick={() => startBooking(service.id)}>
+                            Réserver
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </section>
@@ -862,7 +1121,7 @@ export default function PublicBookingApp() {
             <div className="eyebrow">Prendre rendez-vous</div>
             <h1 className="page-title">Choisissez votre moment de bien-être.</h1>
             <p className="section-desc">
-              Réservez en moins de deux minutes. Si vous avez créé un compte client, vos informations sont automatiquement préremplies.
+              Réservez en moins de deux minutes. Choisissez votre praticienne pour l’esthétique ou Ludivine pour l’aqua-sport.
             </p>
 
             <div className="booking-steps">
@@ -1027,7 +1286,7 @@ export default function PublicBookingApp() {
                   <h2 style={{ fontSize: 34 }}>Choisissez votre créneau</h2>
                   <div className="grid grid-2" style={{ marginTop: 24 }}>
                     <label>
-                      <span>Employé</span>
+                      <span>{isAquasportBooking ? "Maître-nageur" : "Esthéticienne"}</span>
                       <select
                         className="select"
                         value={form.employeeId}
@@ -1036,7 +1295,7 @@ export default function PublicBookingApp() {
                           updateField("time", "");
                         }}
                       >
-                        <option value="">Attribution automatique</option>
+                        <option value="">Sans préférence</option>
                         {employeesForService.map((employee) => (
                           <option key={employee.id} value={employee.id}>
                             {employee.public_display_name} · {employee.role_title}

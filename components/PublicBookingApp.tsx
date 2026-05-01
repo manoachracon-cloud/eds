@@ -201,6 +201,7 @@ export default function PublicBookingApp() {
   const [accountMessage, setAccountMessage] = useState("");
   const [dianaNeed, setDianaNeed] = useState("");
   const [dianaRecommendation, setDianaRecommendation] = useState<DianaRecommendation | null>(null);
+  const [dianaAiLoading, setDianaAiLoading] = useState(false);
 
   const selectedService = useMemo(
     () => services.find((service) => service.id === form.serviceId) || null,
@@ -438,7 +439,7 @@ export default function PublicBookingApp() {
     };
   }
 
-  function askDianaRenoir() {
+  async function askDianaRenoir() {
     const request = normalizeDianaText(dianaNeed);
 
     if (!request) {
@@ -452,6 +453,46 @@ export default function PublicBookingApp() {
         ]
       });
       return;
+    }
+
+    if (process.env.NEXT_PUBLIC_DIANA_OPENAI_ENABLED !== "false") {
+      setDianaAiLoading(true);
+
+      try {
+        const response = await fetch("/api/diana", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: dianaNeed,
+            clientAccount,
+            mode: "service_recommendation"
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+
+          if (data?.recommendation?.title) {
+            setDianaRecommendation({
+              title: data.recommendation.title,
+              intro: data.recommendation.intro,
+              serviceIds: Array.isArray(data.recommendation.serviceIds)
+                ? data.recommendation.serviceIds
+                : [],
+              tips: Array.isArray(data.recommendation.tips)
+                ? data.recommendation.tips
+                : []
+            });
+            return;
+          }
+        }
+      } catch {
+        // Si l’API OpenAI est indisponible, Diana repasse automatiquement en mode local.
+      } finally {
+        setDianaAiLoading(false);
+      }
     }
 
     const dangerousOrMedical = hasAny(request, [
@@ -1040,8 +1081,8 @@ export default function PublicBookingApp() {
                   <div className="diana-avatar">DR</div>
                   <h3>Diana Renoir</h3>
                   <p className="muted">
-                    Conseillère IA paramétrée avec la carte de soins. Elle sait orienter, refuser les demandes inadaptées,
-                    clarifier les demandes floues et proposer une réponse différente selon le besoin.
+                    Conseillère IA connectée à ChatGPT quand la clé OpenAI est configurée. Elle connaît la carte de soins,
+                    refuse les demandes inadaptées et propose une orientation personnalisée.
                   </p>
 
                   <label style={{ marginTop: 18, display: "block" }}>
@@ -1072,8 +1113,8 @@ export default function PublicBookingApp() {
                   </div>
 
                   <div className="actions">
-                    <button className="btn btn-primary" onClick={askDianaRenoir}>
-                      Demander à Diana Renoir
+                    <button className="btn btn-primary" onClick={askDianaRenoir} disabled={dianaAiLoading}>
+                      {dianaAiLoading ? "Diana Renoir analyse..." : "Demander à Diana Renoir"}
                     </button>
                     <button
                       className="btn btn-light"

@@ -1,0 +1,72 @@
+IMPORTANT — CE DOSSIER EST PRÊT POUR GITHUB + VERCEL
+
+Tu dois ouvrir ce dossier.
+
+À l'intérieur, tu dois voir directement :
+
+app
+components
+docs
+lib
+public
+supabase
+package.json
+vercel.json
+
+Le dossier public contient maintenant un fichier visible :
+README-PUBLIC.txt
+
+Donc tu n’as plus besoin d’afficher les fichiers cachés.
+
+SUR GITHUB :
+
+1. Crée un dépôt vide nommé :
+   esthetic-diamonds-reservation
+
+2. Clique sur :
+   Add file → Upload files
+
+3. Ouvre CE dossier sur ton ordinateur.
+
+4. Sélectionne TOUT ce qu'il y a à l'intérieur :
+   - app
+   - components
+   - docs
+   - lib
+   - public
+   - supabase
+   - package.json
+   - vercel.json
+   - tous les autres fichiers
+
+5. Glisse tout dans GitHub.
+
+6. Clique sur :
+   Commit changes
+
+ATTENTION :
+
+Ne glisse pas le dossier complet.
+
+Tu dois glisser uniquement ce qu'il y a À L'INTÉRIEUR du dossier.
+
+Après upload, GitHub doit afficher directement :
+
+app
+components
+docs
+lib
+public
+supabase
+package.json
+vercel.json
+
+Si tu dois cliquer dans un dossier pour voir app, ce n'est pas bon.
+
+VERCEL :
+
+Framework : Next.js
+Root Directory : vide
+Build Command : npm run build
+Install Command : npm install
+Output Directory : vide

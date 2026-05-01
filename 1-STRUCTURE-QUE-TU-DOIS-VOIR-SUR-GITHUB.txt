@@ -1,0 +1,28 @@
+STRUCTURE CORRECTE SUR GITHUB
+
+esthetic-diamonds-reservation/
+├── app/
+├── components/
+├── docs/
+├── lib/
+├── public/
+├── supabase/
+├── package.json
+├── vercel.json
+├── middleware.ts
+├── next.config.mjs
+└── tsconfig.json
+
+
+STRUCTURE INCORRECTE
+
+esthetic-diamonds-reservation/
+└── un-dossier-en-plus/
+    ├── app/
+    ├── components/
+    ├── lib/
+    ├── package.json
+    └── vercel.json
+
+La première structure est la bonne.
+La deuxième structure provoque l'erreur Vercel : app directory not found.

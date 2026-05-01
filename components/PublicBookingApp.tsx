@@ -493,7 +493,7 @@ export default function PublicBookingApp() {
     }
 
     const nonsense = request.length < 4 || hasAny(request, [
-      /^(azerty|qwerty|test|lol|mdr|blabla|???|xxx|123|rien|nimporte quoi)$/i,
+      /^(azerty|qwerty|test|lol|mdr|blabla|\?{3}|xxx|123|rien|nimporte quoi)$/i,
       /\b(dinosaure|dragon|alien|sorcellerie|teleportation|devenir invisible|lune|mars|robot tueur)\b/
     ]);
 
